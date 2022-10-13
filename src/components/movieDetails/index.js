@@ -27,7 +27,7 @@ const MovieDetails = ( props) => {
       <Typography variant="h5" component="h3">
         Overview
       </Typography>
-
+      
       <Typography variant="h6" component="p">
         {movie.overview}
       </Typography>
