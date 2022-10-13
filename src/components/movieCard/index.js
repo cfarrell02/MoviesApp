@@ -17,6 +17,9 @@ import Avatar from '@mui/material/Avatar';
 
 export default function MovieCard(props) {
   const movie = props.movie;
+  const movies = JSON.parse(localStorage.getItem("favourites")); 
+  const ids = movies.map((m) => m.id);
+  console.log(ids)
   const handleAddToFavourite = (e) => {
     e.preventDefault();
     props.selectFavourite(movie.id);
@@ -25,7 +28,7 @@ export default function MovieCard(props) {
     <Card sx={{ maxWidth: 345 }}>
        <CardHeader
         avatar={
-          movie.favourite ? (
+          movie.favourite || ids.includes(movie.id)  ? (
             <Avatar sx={{ backgroundColor: 'red' }}>
               <FavoriteIcon />
             </Avatar>

@@ -9,7 +9,7 @@ const HomePage = (props) => {
 
   const addToFavourites = (movieId) => {
     const updatedMovies = movies.map((m) =>
-      m.id === movieId ? { ...m, favourite: true } : m
+      m.id === movieId ? { ...m, favourite: true } : m,
     );
     setMovies(updatedMovies);
   };

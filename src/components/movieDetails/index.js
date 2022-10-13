@@ -9,6 +9,7 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 
 
+
 const root = {
     display: "flex",
     justifyContent: "center",
@@ -22,12 +23,15 @@ const chip = { margin: 0.5 };
 const MovieDetails = ( props) => {
   const movie = props.movie
 
+
+
   return (
     <>
+    
       <Typography variant="h5" component="h3">
         Overview
       </Typography>
-      
+
       <Typography variant="h6" component="p">
         {movie.overview}
       </Typography>
@@ -36,6 +40,7 @@ const MovieDetails = ( props) => {
         component="ul" 
         sx={root}
       >
+        
         <li>
           <Chip label="Genres" sx={chip} color="primary" />
         </li>
@@ -46,6 +51,7 @@ const MovieDetails = ( props) => {
         ))}
       </Paper>
       <Paper component="ul" sx={root}>
+      
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
           icon={<MonetizationIcon />}
