@@ -4,8 +4,9 @@ import { BrowserRouter, Route, Navigate, Routes } from "react-router-dom";
 import HomePage from "./pages/homePage";
 import MoviePage from "./pages/movieDetailsPage";
 import SiteHeader from './components/siteHeader'
-import favouriteMoviesPage from "./pages/favouriteMoviesPage"; // NEW
+import FavouriteMoviesPage from "./pages/favouriteMoviesPage"; // NEW
 import MovieReviewPage from "./pages/movieReviewPage";
+import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import {Link} from 'react-router-dom'
 
 const App = () => {
@@ -13,9 +14,10 @@ const App = () => {
     <BrowserRouter>
           <SiteHeader />      {/* New Header  */}
       <Routes>
-        <Route exact path="/movies/favourites" element={<favouriteMoviesPage />} />
+        <Route exact path="/movies/favourites" element={<FavouriteMoviesPage />} />
         <Route path="/movies/:id" element={<MoviePage />} />
         <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
+        <Route path="/upcoming" element={ <UpcomingMoviesPage /> } />
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={ <Navigate to="/" /> } />
       </Routes>
