@@ -19,7 +19,6 @@ export default function MovieCard(props) {
   const movie = props.movie;
   const movies = JSON.parse(localStorage.getItem("favourites")); 
   const ids = movies.map((m) => m.id);
-  console.log(ids)
   const handleAddToFavourite = (e) => {
     e.preventDefault();
     props.selectFavourite(movie.id);
