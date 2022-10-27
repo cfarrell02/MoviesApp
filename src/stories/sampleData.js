@@ -1,3 +1,4 @@
+
 export default {
     adult: false,
     backdrop_path: "/5Iw7zQTHVRBOYpA0V6z0yypOPZh.jpg",
@@ -58,12 +59,8 @@ export default {
     ],
     production_countries: [
       {
-        iso_3166_1: "FR",
-        name: "France",
-      },
-      {
-        iso_3166_1: "LT",
-        name: "Lithuania",
+        iso_3166_1: "US",
+        name: "United States of America",
       },
     ],
     release_date: "2017-12-13",
@@ -82,3 +79,4 @@ export default {
     vote_average: 7,
     vote_count: 9692,
   };
+  
