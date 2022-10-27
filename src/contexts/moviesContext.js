@@ -18,6 +18,7 @@ const MoviesContextProvider = (props) => {
     const addReview = (movie, review) => {
       setMyReviews( {...myReviews, [movie.id]: review } )
     };
+
   // We will use this function in a later section
   const removeFromFavourites = (movie) => {
     setFavourites( favourites.filter(
@@ -30,7 +31,8 @@ const MoviesContextProvider = (props) => {
       value={{
         favourites,
         addToFavourites,
-        removeFromFavourites
+        removeFromFavourites,
+        addReview
       }}
     >
       {props.children}
