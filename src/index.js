@@ -3,6 +3,7 @@ import {createRoot} from "react-dom/client";
 import { BrowserRouter, Route, Navigate, Routes } from "react-router-dom";
 import HomePage from "./pages/homePage";
 import MoviePage from "./pages/movieDetailsPage";
+import TVPage from "./pages/tvShowsPage";
 import SiteHeader from './components/siteHeader'
 import FavouriteMoviesPage from "./pages/favouriteMoviesPage"; // NEW
 import MovieReviewPage from "./pages/movieReviewPage";
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
         <Route path="/mustwatch" element={<MustWatchMovies/>} />
         <Route path="/movies/upcoming" element={ <UpcomingMoviesPage /> } />
+        <Route path="/tvshows" element = {<TVPage/>}/>
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={ <Navigate to="/" /> } />
       </Routes>
