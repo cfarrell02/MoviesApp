@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "../headerMovieList";
+import Header from "../headerTVList";
 import FilterCard from "../filterTVCard";
 import TVList from "../tvList";
 import Grid from "@mui/material/Grid";
@@ -12,12 +12,12 @@ function TVListPageTemplate({ TV, title, action }) {
 
   let displayedTV = TV
     .filter((m) => {
-      return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
+      return m.name.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
     })
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;
     });
-
+    
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
     else setGenreFilter(value);
