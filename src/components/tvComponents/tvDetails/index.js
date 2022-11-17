@@ -3,6 +3,8 @@ import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CancelIcon from '@mui/icons-material/Cancel';
 import StarRate from "@mui/icons-material/StarRate";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
@@ -29,10 +31,12 @@ const TVDetails = ({ TV }) => {  // Don't miss this!
   return (
   
     <>
-    
+      
       <Typography variant="h5" component="h3">
-        Overview
+        Overview 
       </Typography>
+      {TV.in_production ? <Chip label ={ `In Production`} icon = { <CheckCircleOutlineIcon/>} color = "primary"/>:
+      <Chip label ={ `Ended on ${TV.last_air_date}`} icon = { <CancelIcon/>} color = "secondary"/>}
 
       <Typography variant="h6" component="p">
         {TV.overview}
@@ -61,9 +65,10 @@ const TVDetails = ({ TV }) => {  // Don't miss this!
         />
         <Chip
           icon={<StarRate />}
-          label={`${TV.vote_average} (${TV.vote_count}`}
+          label={`${TV.vote_average} (${TV.vote_count})`}
         />
         <Chip label={`First Aired In: ${TV.first_air_date}`} />
+        <Chip label={`Most Recent Air Date: ${TV.last_air_date}`} />
       </Paper>
       <Paper 
         component="ul" 

@@ -33,8 +33,9 @@ const FavouriteMoviesPage = () => {
   });
 
   const toDo = () => true;
-
+console.log(movies)
   return (
+
     <PageTemplate
       title="Favourite Movies"
       movies={movies}
@@ -46,7 +47,8 @@ const FavouriteMoviesPage = () => {
           </>
         );
       }}
-    />
+    /> 
+    
   );
 };
 

@@ -7,7 +7,7 @@ import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
 
 const TVPage = (props) => {
 
-  const {  data, error, isLoading, isError }  = useQuery('discover', getTVShows)
+  const {  data, error, isLoading, isError }  = useQuery('discover-tv', getTVShows)
 
   if (isLoading) {
     return <Spinner />
