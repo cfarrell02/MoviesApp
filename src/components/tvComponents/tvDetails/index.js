@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../../movieComponents/movieReviews";
 import { Tv } from "@mui/icons-material";
+import TVReviews from "../tvReviews";
 
 
 
@@ -97,6 +98,7 @@ const TVDetails = ({ TV }) => {  // Don't miss this!
         Reviews
       </Fab>
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+        <TVReviews TV = {TV}/>
       </Drawer>
     </>
   );

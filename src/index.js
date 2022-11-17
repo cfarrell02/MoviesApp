@@ -16,6 +16,7 @@ import TopRatedMoviesPage from "./pages/topratedMoviesPage";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import {Link} from 'react-router-dom'
 import MustWatchMovies from "./pages/mustWatchMoviePage";
+import TVReviewPage from "./pages/tvReviewPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,10 +38,11 @@ const App = () => {
         <Route exact path="/movies/favourites" element={<FavouriteMoviesPage />} />
         <Route path="/movies/:id" element={<MoviePage />} />
         <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
+        <Route path="/tvshows/reviews/:id" element = {<TVReviewPage/>}/>
         <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
         <Route path="/mustwatch" element={<MustWatchMovies/>} />
         <Route path="/movies/upcoming" element={ <UpcomingMoviesPage /> } />
-        <Route path= "/tvshows/toprated" element = {<TopRatedMoviesPage/>}/>
+        <Route path= "/movies/toprated" element = {<TopRatedMoviesPage/>}/>
         <Route path="/tvshows" element = {<TVPage/>}/>
         <Route path="/tvshows/:id" element = {<TVDetailsPage/>}/>
         <Route path="/" element={<HomePage />} />
