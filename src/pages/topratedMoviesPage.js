@@ -1,5 +1,5 @@
 import React from "react";
-import { getUpcomingMovies } from "../api/tmdb-api";
+import { getTopRatedMovies } from "../api/tmdb-api";
 import PageTemplate from '../components/movieComponents/templateMovieListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
@@ -8,7 +8,7 @@ import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
 
 const TopRatedMoviesPage  = (props) => {
 
-  const {  data, error, isLoading, isError }  = useQuery('toprated', getUpcomingMovies)
+  const {  data, error, isLoading, isError }  = useQuery('toprated', getTopRatedMovies)
 
   if (isLoading) {
     return <Spinner />
@@ -34,6 +34,6 @@ const TopRatedMoviesPage  = (props) => {
     />
   );
 };
-export default UpcomingMoviesPage ;
+export default TopRatedMoviesPage ;
 
 
