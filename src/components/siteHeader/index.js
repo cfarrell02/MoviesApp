@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import { Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
@@ -40,14 +41,16 @@ const SiteHeader = ({ history }) => {
 
   const dropdownOptions = [
     [
-      { label: "Movies", path: "/" },
+      { title: "Movies"},
+      { label: "Discover", path: "/" },
       { label: "Upcoming", path: "/movies/upcoming" },
       { label: "Favourites", path: "/movies/favourites" },
       { label: "Must Watch", path: "/mustwatch" },
       { label: "Top Rated", path: "/movies/toprated" }
     ],
     [
-      { label: "TV Shows", path: "/tvshows" },
+      { title: "TV Shows"},
+      { label: "Discover", path: "/tvshows" },
       { label: "Top Rated", path: "/tvshows/toprated"}
     ]
   ]
@@ -61,9 +64,7 @@ const SiteHeader = ({ history }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+
 
   return (
     <>
@@ -113,24 +114,28 @@ const SiteHeader = ({ history }) => {
               </>
             ) : (
               <>
-
+              <Divider orientation="vertical" flexItem />
               {dropdownOptions.map((menu) => (
                 <>
                   <PopupState variant="popover" popupId="demo-popup-menu">
                   {(popupState) => (
                     <React.Fragment>
+                      <div style ={{paddingLeft: 10, paddingRight: 10}}>
                       <Button variant="contained" {...bindTrigger(popupState)}>
-                        {menu[0].label}
+                        {menu[0].title}
                       </Button>
-                      <Menu {...bindMenu(popupState)}>
-                        {menu.map((opt) => (
+                      </div>
+                      <Menu {...bindMenu(popupState)} >
+                        {menu.filter((item,index) => index !== 0).map((opt) => (
                           <MenuItem onClick={popupState.close}><div onClick={() => handleMenuSelect(opt.path)}>{opt.label}</div></MenuItem>
                         ))}
                         
                       </Menu>
                     </React.Fragment>
+                    
                   )}
                   </PopupState>
+                  <Divider orientation="vertical" flexItem />
                   </>
                 
               ))}

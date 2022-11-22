@@ -9,6 +9,8 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
+import SimilarMovies from "../similarMovies";
+import Divider from "@mui/material/Divider";
 
 
 
@@ -77,6 +79,8 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
           </li>
         ))}
       </Paper>
+      <Divider style={{paddingTop: 20, paddingBottom: 20}}/>
+      <SimilarMovies movie = {movie}/>
       <Fab
         color="secondary"
         variant="extended"
@@ -87,9 +91,11 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
           right: '1em'
         }}
       >
+
         <NavigationIcon />
-        Reviews
+        Movies
       </Fab>
+      
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <MovieReviews movie={movie} />
       </Drawer>
