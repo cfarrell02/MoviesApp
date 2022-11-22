@@ -27,15 +27,14 @@ function MovieListPageTemplate({ movies, title, action }) {
     <Grid container sx={{ padding: '20px' }}>
       <Grid item xs={12}>
         <Header title={title} />
-      </Grid>
-      <Grid item container spacing={5}>
-        <Grid key="find" item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <FilterCard
+        <FilterCard
             onUserInput={handleChange}
             titleFilter={nameFilter}
             genreFilter={genreFilter}
           />
-        </Grid>
+      </Grid>
+      
+      <Grid item container spacing={5}>
         <MovieList action={action} movies={displayedMovies}></MovieList>
       </Grid>
     </Grid>

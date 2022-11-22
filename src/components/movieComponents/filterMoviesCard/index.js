@@ -13,6 +13,9 @@ import img from '../../../images/pexels-dziana-hasanbekava-5480827.jpg';
 import { getGenres } from "../../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../../spinner';
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid"
+import Box from '@mui/material/Box';
 
 const formControl = 
   {
@@ -51,17 +54,41 @@ const formControl =
   
   
     return (
-    <Card 
+      <Box display="flex"
+      justifyContent="center"
+      alignItems="center">
+
+      <Paper 
+      
+      component="div" 
       sx={{
-        maxWidth: 345,
+        display: "flex",
+        justifyContent: "space-around",
+        flexWrap: "wrap",
+        marginBottom: 1.5,
+        marginTop:1.5,
+       maxWidth:500,
         backgroundColor: "rgb(204, 204, 0)"
-      }} 
-      variant="outlined">
-      <CardContent>
-        <Typography variant="h5" component="h1">
+      }}
+      >
+        
+        <Grid container spacing={0}
+      alignItems="center"
+      justifyContent="center"
+      sx={{ flexGrow: 1 }}
+      >
+<Grid item xs={12} display="flex"
+  justifyContent="center"
+  alignItems="center" sx={{paddingBottom:1 , paddingTop:2}} >
+
+<Typography variant="h5" component="h1">
           <SearchIcon fontSize="large" />
-          Filter the movies.
+          Filter the Movies.
         </Typography>
+        </Grid>
+  <Grid item xs={6} display="flex"
+  justifyContent="right"
+  alignItems="center" >
         <TextField
       sx={formControl}
       id="filled-search"
@@ -70,7 +97,13 @@ const formControl =
       variant="filled"
       value={props.titleFilter}
       onChange={handleTextChange}
+      
     />
+
+      </Grid>
+      <Grid item xs={6} display="flex"
+  justifyContent="left"
+  alignItems="center" >
         <FormControl sx={formControl}>
           <InputLabel id="genre-label">Genre</InputLabel>
           <Select
@@ -79,7 +112,7 @@ const formControl =
     defaultValue=""
     value={props.genreFilter}
     onChange={handleGenreChange}
-  >
+  > 
             {genres.map((genre) => {
               return (
                 <MenuItem key={genre.id} value={genre.id}>
@@ -88,20 +121,16 @@ const formControl =
               );
             })}
           </Select>
+          
         </FormControl>
-      </CardContent>
-      <CardMedia
-        sx={{ height: 300 }}
-        image={img}
-        title="Filter"
-      />
-      <CardContent>
-        <Typography variant="h5" component="h1">
-          <SearchIcon fontSize="large" />
-          Filter the movies.
-          <br />
-        </Typography>
-      </CardContent>
-    </Card>
+        </Grid>
+        
+        
+              
+      {/* <img src={img} style={{height:300}}/> */}
+
+            </Grid>
+    </Paper>
+ </Box>
   );
 }
