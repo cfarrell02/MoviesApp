@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -115,29 +116,23 @@ const SiteHeader = ({ history }) => {
 
               {dropdownOptions.map((menu) => (
                 <>
-                      <Button
-                      id={menu[0].label}
-                      aria-controls={open ? 'basic-menu' : undefined}
-                      aria-haspopup="true"
-                      aria-expanded={open ? 'true' : undefined}
-                      onClick={handleMenu}
-                    >
-                      {menu[0].label}
-                    </Button>
-                    <Menu
-                      id="basic-menu"
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}
-                      MenuListProps={{
-                        'aria-labelledby': 'basic-button',
-                      }}
-                    >
-                      {menu.map((e) => (
-                        <MenuItem onClick={() => handleMenuSelect(e.path)}>{e.label}</MenuItem>
-                      ))}
-                    </Menu>
-                    </>
+                  <PopupState variant="popover" popupId="demo-popup-menu">
+                  {(popupState) => (
+                    <React.Fragment>
+                      <Button variant="contained" {...bindTrigger(popupState)}>
+                        {menu[0].label}
+                      </Button>
+                      <Menu {...bindMenu(popupState)}>
+                        {menu.map((opt) => (
+                          <MenuItem onClick={popupState.close}><div onClick={() => handleMenuSelect(opt.path)}>{opt.label}</div></MenuItem>
+                        ))}
+                        
+                      </Menu>
+                    </React.Fragment>
+                  )}
+                  </PopupState>
+                  </>
+                
               ))}
               </>
             )}
