@@ -43,7 +43,7 @@ export default function TVCard({ TV, action }) {
   };
  
    return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 500 }}>
        <CardHeader
         avatar={
           TV.favouriteTV   ? (
@@ -53,7 +53,7 @@ export default function TVCard({ TV, action }) {
           ) : null
         }
         title={
-          <Typography variant="h5" component="p">
+          <Typography variant="h6" component="p" >
             {TV.name}{" "}
           </Typography>
         }

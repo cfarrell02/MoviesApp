@@ -1,6 +1,8 @@
-export const getMovies = () => {
+export const getMovies = (args) => {
+  const [, pageNumPart] = args.queryKey;
+  const {pageNum} = pageNumPart;
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${pageNum}`
   ).then((response) => {
     if (!response.ok) {
       throw new Error(response.json().message);
@@ -12,9 +14,11 @@ export const getMovies = () => {
   });
 };
 
-export const getTVShows = () => {
+export const getTVShows = (args) => {
+  const [, pageNumPart] = args.queryKey;
+  const {pageNum} = pageNumPart;
   return fetch(
-    `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
+    `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${pageNum}`
   ).then((response) => {
     if (!response.ok) {
       throw new Error(response.json().message);
@@ -81,9 +85,12 @@ export const getMovie = (args) => {
        throw error
     });
   };
-  export const getTopRatedTVShows = () => {
+  export const getTopRatedTVShows = (args) => {
+    const [, pageNumPart] = args.queryKey;
+    const {pageNum} = pageNumPart;
+    console.log(`https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${pageNum}`)
     return fetch(
-      `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${pageNum}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);

@@ -39,7 +39,6 @@ const TemplateTVPage = ({ TV, children }) => {
                     <ImageListItem key={image.file_path} cols={1}>
                     <img
                         src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
-                       // src={`https://static.wikia.nocookie.net/amogus/images/c/cb/Susremaster.png/revision/latest?cb=20210806124552`}
                         alt={image.poster_path}
                     />
                     </ImageListItem>

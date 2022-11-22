@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { getTVShows } from "../api/tmdb-api";
 import PageTemplate from '../components/tvComponents/templateTVListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import AddToFavouritesIconTV from '../components/cardIcons/addToFavouritesTV'
+import { TVContext } from "../contexts/tvContext";
+import { useParams } from "react-router-dom";
 
 const TVPage = (props) => {
-
-  const {  data, error, isLoading, isError }  = useQuery('discover-tv', getTVShows)
-
+  const {setPageNumber, setShowType} = useContext(TVContext);
+  const {pageNumber} = useParams();
+  const {  data, error, isLoading, isError }  = useQuery([`discover-tv-${pageNumber}`,{pageNum:pageNumber}], getTVShows)
+  setPageNumber(pageNumber);
+  setShowType('discover');
   if (isLoading) {
     return <Spinner />
   }

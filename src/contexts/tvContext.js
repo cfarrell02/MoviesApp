@@ -6,10 +6,19 @@ const TVContextProvider = (props) => {
   const [favouriteTV, setFavouriteTV] = useState( [] )
  // const [myReviews, setMyReviews] = useState( [] )
   const [mustWatchTV,setMustWatchTV] = useState( [] )
+  const [pageNum, setPageNum] = useState([])
+  const [type, setType] = useState([])
+  const setPageNumber = (num) => {
+    
+    //if(newPageNum <= 0) return;
+    setPageNum(num);
+  }
 
+  const setShowType = (type) =>{
+    setType(type);
+  }
 
   const addToFavouriteTV = (TV) => {
-    console.log(TV.name);
     let newFavourites = [...favouriteTV];
     if (!favouriteTV.includes(TV.id)) {
       newFavourites.push(TV.id);
@@ -23,7 +32,7 @@ const TVContextProvider = (props) => {
       newMustWatch.push(TV.id);
     }
     setMustWatchTV(newMustWatch);
-    console.log(newMustWatch)
+   // console.log(newMustWatch)
   };
 
   // We will use this function in a later section
@@ -39,9 +48,9 @@ const TVContextProvider = (props) => {
     ) )
   };
 
-//   const addReview = (TV, review) => {
-//     setMyReviews( {...myReviews, [TV.id]: review } )
-//   };
+  // const addReview = (TV, review) => {
+  //   setMyReviews( {...myReviews, [TV.id]: review } )
+  // };
 
  return (
     <TVContext.Provider
@@ -53,6 +62,10 @@ const TVContextProvider = (props) => {
         mustWatchTV,
         addToMustWatch,
         removeFromMustWatch,
+        pageNum,
+        setPageNumber,
+        type,
+        setShowType
       }}
     >
       {props.children}
