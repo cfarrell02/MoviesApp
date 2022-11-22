@@ -17,24 +17,36 @@ import Avatar from '@mui/material/Avatar';
 import { TVContext } from "../../../contexts/tvContext";
 
 export default function TVCard({ TV, action }) {
-  // const { favourites, addToFavourites } = useContext(TVContext);
+  const { favouriteTV, addToFavouriteTV, mustWatchTV, addToMustWatchTV } = useContext(TVContext);
  
-  //  if (favourites.find((id) => id === TV.id)) {
-  //    TV.favourite = true;
-  //  } else {
-  //    TV.favourite = false
-  //  }
+   if (favouriteTV.find((id) => id === TV.id)) {
+     TV.favouriteTV = true;
+   } else {
+     TV.favouriteTV = false
+   }
+   
  
-  //  const handleAddToFavourite = (e) => {
-  //    e.preventDefault();
-  //    addToFavourites(TV);
-  //  };
+   const handleAddToFavourite = (e) => {
+     e.preventDefault();
+     addToFavouriteTV(TV);
+   };
+
+   if (mustWatchTV.find((id) => id === TV.id)) {
+    TV.mustWatchTV = true;
+  } else {
+    TV.mustWatchTV = false
+  }
+
+   const handleAddToMustWatch = (e) => {
+    e.preventDefault();
+    addToMustWatchTV(TV);
+  };
  
    return (
     <Card sx={{ maxWidth: 345 }}>
        <CardHeader
         avatar={
-          TV.favourite   ? (
+          TV.favouriteTV   ? (
             <Avatar sx={{ backgroundColor: 'red' }}>
               <FavoriteIcon />
             </Avatar>

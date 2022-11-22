@@ -93,7 +93,7 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
       >
 
         <NavigationIcon />
-        Movies
+        Reviews
       </Fab>
       
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>

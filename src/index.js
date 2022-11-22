@@ -18,6 +18,7 @@ import {Link} from 'react-router-dom'
 import MustWatchMovies from "./pages/mustWatchMoviePage";
 import TVReviewPage from "./pages/tvReviewPage";
 import TopRatedTVPage from "./pages/topratedTVPage";
+import TVContextProvider from "./contexts/tvContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,6 +36,7 @@ const App = () => {
     <BrowserRouter>
           <SiteHeader />      {/* New Header  */}
           <MoviesContextProvider>
+            <TVContextProvider>
       <Routes>
         <Route exact path="/movies/favourites" element={<FavouriteMoviesPage />} />
         <Route path="/movies/:id" element={<MoviePage />} />
@@ -50,6 +52,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={ <Navigate to="/" /> } />
       </Routes>
+      </TVContextProvider>
       </MoviesContextProvider>
     </BrowserRouter>
     <ReactQueryDevtools initialIsOpen={false} />

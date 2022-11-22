@@ -68,7 +68,7 @@ const SiteHeader = ({ history }) => {
 
   return (
     <>
-      <AppBar position="fixed" color="secondary">
+      <AppBar position="fixed" color="secondary" sx={{ backgroundColor: 'lightblue', color: 'black' }}>
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
             TMDB Client
@@ -121,13 +121,13 @@ const SiteHeader = ({ history }) => {
                   {(popupState) => (
                     <React.Fragment>
                       <div style ={{paddingLeft: 10, paddingRight: 10}}>
-                      <Button variant="contained" {...bindTrigger(popupState)}>
+                      <Button variant="contained" {...bindTrigger(popupState)} sx={{ backgroundColor: 'darkblue' , color : 'white'}}>
                         {menu[0].title}
                       </Button>
                       </div>
                       <Menu {...bindMenu(popupState)} >
                         {menu.filter((item,index) => index !== 0).map((opt) => (
-                          <MenuItem onClick={popupState.close}><div onClick={() => handleMenuSelect(opt.path)}>{opt.label}</div></MenuItem>
+                          <div onClick={() => handleMenuSelect(opt.path)}><MenuItem onClick={popupState.close}>{opt.label}</MenuItem></div>
                         ))}
                         
                       </Menu>

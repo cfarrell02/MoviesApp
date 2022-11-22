@@ -10,9 +10,9 @@ import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
-import MovieReviews from "../../movieComponents/movieReviews";
-import { Tv } from "@mui/icons-material";
+import SimilarTV from "../similarTV";
 import TVReviews from "../tvReviews";
+import { Divider } from "@mui/material";
 
 
 
@@ -84,6 +84,8 @@ const TVDetails = ({ TV }) => {  // Don't miss this!
           </li>
         ))}
       </Paper>
+      <Divider style={{paddingTop: 20, paddingBottom: 20}}/>
+      <SimilarTV TV = {TV}/>
       <Fab
         color="secondary"
         variant="extended"
@@ -94,6 +96,7 @@ const TVDetails = ({ TV }) => {  // Don't miss this!
           right: '1em'
         }}
       >
+        
         <NavigationIcon />
         Reviews
       </Fab>

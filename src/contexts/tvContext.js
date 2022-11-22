@@ -3,38 +3,56 @@ import React, { useState } from "react";
 export const TVContext = React.createContext(null);
 
 const TVContextProvider = (props) => {
-  const [myReviews, setMyReviews] = useState( {} ) 
-  const [favourites, setFavourites] = useState( [] )
+  const [favouriteTV, setFavouriteTV] = useState( [] )
+ // const [myReviews, setMyReviews] = useState( [] )
+  const [mustWatchTV,setMustWatchTV] = useState( [] )
 
-  const addToFavourites = (TV) => {
-    let newFavourites = [...favourites];
-    if (!favourites.includes(TV.id)) {
+
+  const addToFavouriteTV = (TV) => {
+    console.log(TV.name);
+    let newFavourites = [...favouriteTV];
+    if (!favouriteTV.includes(TV.id)) {
       newFavourites.push(TV.id);
     }
-    setFavourites(newFavourites);
+    setFavouriteTV(newFavourites);
   };
 
-
-
-
-    const addReview = (TV, review) => {
-      setMyReviews( {...myReviews, [TV.id]: review } )
-    };
+  const addToMustWatch = (TV) => {
+    let newMustWatch = [...mustWatchTV];
+    if (!mustWatchTV.includes(TV.id)) {
+      newMustWatch.push(TV.id);
+    }
+    setMustWatchTV(newMustWatch);
+    console.log(newMustWatch)
+  };
 
   // We will use this function in a later section
   const removeFromFavourites = (TV) => {
-    setFavourites( favourites.filter(
+    setFavouriteTV( favouriteTV.filter(
       (mId) => mId !== TV.id
     ) )
   };
 
-  return (
+  const removeFromMustWatch = (TV) => {
+    setMustWatchTV( mustWatchTV.filter(
+      (mId) => mId !== TV.id
+    ) )
+  };
+
+//   const addReview = (TV, review) => {
+//     setMyReviews( {...myReviews, [TV.id]: review } )
+//   };
+
+ return (
     <TVContext.Provider
       value={{
-        favourites,
-        addToFavourites,
+        favouriteTV,
+        addToFavouriteTV,
         removeFromFavourites,
-        addReview
+        // addReview,
+        mustWatchTV,
+        addToMustWatch,
+        removeFromMustWatch,
       }}
     >
       {props.children}
