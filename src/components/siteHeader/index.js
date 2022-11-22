@@ -35,7 +35,8 @@ const SiteHeader = ({ history }) => {
     { label: "Must Watch", path: "/mustwatch" },
     { label: "Top Rated", path: "/movies/toprated" },
     { label: "TV Shows", path: "/tvshows" },
-    { label: "Top Rated", path: "/tvshows/toprated"}
+    { label: "Top Rated", path: "/tvshows/toprated"},
+    { label: "Favourites", path: "/tvshows/favourites" }
 
   ];
 
@@ -51,7 +52,8 @@ const SiteHeader = ({ history }) => {
     [
       { title: "TV Shows"},
       { label: "Discover", path: "/tvshows" },
-      { label: "Top Rated", path: "/tvshows/toprated"}
+      { label: "Top Rated", path: "/tvshows/toprated"},
+      { label: "Favourites", path: "/tvshows/favourites" }
     ]
   ]
 

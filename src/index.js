@@ -15,6 +15,7 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import TopRatedMoviesPage from "./pages/topratedMoviesPage";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import {Link} from 'react-router-dom'
+import FavouriteTVPage from "./pages/favouriteTVPage";
 import MustWatchMovies from "./pages/mustWatchMoviePage";
 import TVReviewPage from "./pages/tvReviewPage";
 import TopRatedTVPage from "./pages/topratedTVPage";
@@ -49,6 +50,7 @@ const App = () => {
         <Route path="/tvshows" element = {<TVPage/>}/>
         <Route path="/tvshows/:id" element = {<TVDetailsPage/>}/>
         <Route path="/tvshows/toprated" element={ <TopRatedTVPage /> } />
+        <Route path="/tvshows/favourites" element={ <FavouriteTVPage /> } />
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={ <Navigate to="/" /> } />
       </Routes>
