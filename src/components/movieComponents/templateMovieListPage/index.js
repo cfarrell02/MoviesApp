@@ -6,6 +6,9 @@ import Grid from "@mui/material/Grid";
 import Drawer from "@mui/material/Drawer";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Fab from "@mui/material/Fab";
+import Box from "@mui/material/Box";
+import Footer from "../footerMovie";
+import {MoviesContext} from "../../../contexts/moviesContext";
 
 function MovieListPageTemplate({ movies, title, action }) {
 
@@ -13,6 +16,7 @@ function MovieListPageTemplate({ movies, title, action }) {
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const {pageNum} = useState(MoviesContext)
 
   let displayedMovies = movies
     .filter((m) => {
@@ -36,6 +40,13 @@ function MovieListPageTemplate({ movies, title, action }) {
       <Grid item container spacing={5}>
         <MovieList action={action} movies={displayedMovies}></MovieList>
       </Grid>
+      <Grid item xs = {12}>
+      <Box display="flex"
+      justifyContent="right"
+      alignItems="center"
+      sx= {{paddingTop:2}}>
+        
+      <Footer title={pageNum} /></Box></Grid>
       <Fab
         color="primary"
         variant="extended"

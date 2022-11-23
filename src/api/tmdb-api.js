@@ -59,7 +59,9 @@ export const getMovie = (args) => {
     throw error
  });
 };
-  export const getUpcomingMovies = () => {
+  export const getUpcomingMovies = (args) => {
+    const [, pageNumPart] = args.queryKey;
+    const {pageNum} = pageNumPart;
     return fetch(
       `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
     ).then((response) => {
@@ -72,7 +74,9 @@ export const getMovie = (args) => {
        throw error
     });
   };
-  export const getTopRatedMovies = () => {
+  export const getTopRatedMovies = (args) => {
+    const [, pageNumPart] = args.queryKey;
+    const {pageNum} = pageNumPart;
     return fetch(
       `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
     ).then((response) => {

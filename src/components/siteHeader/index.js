@@ -29,13 +29,13 @@ const SiteHeader = ({ history }) => {
   const navigate = useNavigate();
 
   const menuOptions = [
-    { label: "Movies", path: "/" },
+    { label: "Movies", path: "/page=1" },
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Favourites", path: "/movies/favourites" },
     { label: "Must Watch", path: "/mustwatch" },
     { label: "Top Rated", path: "/movies/toprated" },
-    { label: "TV Shows", path: "/tvshows/page1" },
-    { label: "Top Rated", path: "/tvshows/toprated"},
+    { label: "TV Shows", path: "/tvshows/page=1" },
+    { label: "Top Rated", path: "/tvshows/toprated/page=1"},
     { label: "Favourites", path: "/tvshows/favourites" }
 
   ];
@@ -43,7 +43,7 @@ const SiteHeader = ({ history }) => {
   const dropdownOptions = [
     [
       { title: "Movies"},
-      { label: "Discover", path: "/" },
+      { label: "Discover", path: "/page=1" },
       { label: "Upcoming", path: "/movies/upcoming" },
       { label: "Favourites", path: "/movies/favourites" },
       { label: "Must Watch", path: "/mustwatch" },

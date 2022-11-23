@@ -51,8 +51,8 @@ const App = () => {
         <Route path="/tvshows/:id" element = {<TVDetailsPage/>}/>
         <Route path="/tvshows/toprated/page=:pageNumber" element={ <TopRatedTVPage /> } />
         <Route path="/tvshows/favourites" element={ <FavouriteTVPage /> } />
-        <Route path="/" element={<HomePage />} />
-        <Route path="*" element={ <Navigate to="/" /> } />
+        <Route path="/page=:pageNumber" element={<HomePage />} />
+        <Route path="*" element={ <Navigate to="/page=1" /> } />
       </Routes>
       </TVContextProvider>
       </MoviesContextProvider>
