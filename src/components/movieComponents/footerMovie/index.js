@@ -20,7 +20,10 @@ const Footer = (props) => {
         address = '/page='
         break;
       case 'toprated':
-        address = '/toprated/page='
+        address = '/movies/toprated/page='
+        break;
+      case 'upcoming':
+        address = '/movies/upcoming/page='
         break;
       default:
         address = '/page='

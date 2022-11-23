@@ -44,10 +44,10 @@ const SiteHeader = ({ history }) => {
     [
       { title: "Movies"},
       { label: "Discover", path: "/page=1" },
-      { label: "Upcoming", path: "/movies/upcoming" },
+      { label: "Upcoming", path: "/movies/upcoming/page=1" },
       { label: "Favourites", path: "/movies/favourites" },
       { label: "Must Watch", path: "/mustwatch" },
-      { label: "Top Rated", path: "/movies/toprated" }
+      { label: "Top Rated", path: "/movies/toprated/page=1" }
     ],
     [
       { title: "TV Shows"},
