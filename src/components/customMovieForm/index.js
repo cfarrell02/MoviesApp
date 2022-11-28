@@ -8,9 +8,9 @@ import { useForm, Controller } from "react-hook-form";
 import { MoviesContext } from "../../contexts/moviesContext";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles";
-import { getGenres } from "../../api/tmdb-api";
+import ratings from "./ratingCategories";
 
-const ReviewForm = ({ movie }) => {
+const MovieForm = ({ movie }) => {
   const defaultValues = {
     author: "",
     review: "",
@@ -24,25 +24,24 @@ const ReviewForm = ({ movie }) => {
     reset,
   } = useForm(defaultValues);
   const navigate = useNavigate();
-  //const context = useContext(MoviesContext);
-  const [genre, setGenre] = useState(3);
-  const genres = getGenres();
+  const context = useContext(MoviesContext);
+  const [rating, setRating] = useState(3);
 
 
-  const handleGenreChange = (event) => {
-    setGenre(event.target.value);
+  const handleRatingChange = (event) => {
+    setRating(event.target.value);
   };
 
-  const onSubmit = (movie) => {
-    movie.movieId = movie.id;
-    movie.genre = genre;
-  //  context.addReview(movie, review);
+  const onSubmit = (review) => {
+    review.movieId = movie.id;
+    review.rating = rating;
+    context.addReview(movie, review);
   };
 
   return (
     <Box component="div" sx={styles.root}>
       <Typography component="h2" variant="h3">
-        Make your own movie!
+        Write a review
       </Typography>
       <form sx={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
         <Controller
@@ -58,8 +57,8 @@ const ReviewForm = ({ movie }) => {
               required
               onChange={onChange}
               value={value}
-              id="title"
-              label="Movie Title"
+              id="author"
+              label="Author's name"
               autoFocus
             />
           )}
@@ -85,8 +84,8 @@ const ReviewForm = ({ movie }) => {
               fullWidth
               value={value}
               onChange={onChange}
-              label="Overview"
-              id="overview"
+              label="Review text"
+              id="review"
               multiline
               minRows={10}
             />
@@ -100,18 +99,18 @@ const ReviewForm = ({ movie }) => {
 
         <Controller
           control={control}
-          name="genre"
+          name="rating"
           render={({ field: { onChange, value } }) => (
             <TextField
-              id="select-genre"
+              id="select-rating"
               select
               variant="outlined"
-              label="Genre Select"
-              value={genre}
-              onChange={handleGenreChange}
-              helperText="Don't forget the genre!"
+              label="Rating Select"
+              value={rating}
+              onChange={handleRatingChange}
+              helperText="Don't forget your rating"
             >
-              {genres.map((option) => (
+              {ratings.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
@@ -149,4 +148,4 @@ const ReviewForm = ({ movie }) => {
   );
 };
 
-export default ReviewForm;
+export default MovieForm;
