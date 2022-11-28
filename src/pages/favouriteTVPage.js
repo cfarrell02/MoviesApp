@@ -9,7 +9,8 @@ import WriteReview from "../components/cardIcons/writeReview";
 
 
 const FavouriteTVPage = () => {
-  const {favouriteTV: tvIds } = useContext(TVContext);
+  const {favouriteTV: tvIds, setShowType } = useContext(TVContext);
+
 
   // Create an array of queries and run in parallel.
   const favouriteTVQueries = useQueries(
@@ -34,7 +35,7 @@ const FavouriteTVPage = () => {
 
   const toDo = () => true;
 
-console.log(TV)
+setShowType("favourites")
   return (
 
     <PageTemplate

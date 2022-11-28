@@ -9,6 +9,8 @@ import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
 import Footer from "../footerMovie";
 import {MoviesContext} from "../../../contexts/moviesContext";
+import {getMovieSearchResults} from '../../../api/tmdb-api'
+import { useQuery } from "react-query";
 
 function MovieListPageTemplate({ movies, title, action }) {
 
@@ -18,6 +20,14 @@ function MovieListPageTemplate({ movies, title, action }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const {pageNum} = useState(MoviesContext)
 
+  var {searchQuery, error, isLoading, isError } = useQuery(
+    [`searchQuery-${nameFilter}`, { query: nameFilter, pageNum: 1 }],
+    getMovieSearchResults
+  );
+  searchQuery = getMovieSearchResults(nameFilter, pageNum);
+
+  movies = searchQuery !== undefined ? searchQuery.results : movies;
+ // const searchQuery =  getSearchResults(nameFilter,pageNum)
   let displayedMovies = movies
     .filter((m) => {
       return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;

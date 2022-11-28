@@ -8,7 +8,7 @@ import WriteReview from "../components/cardIcons/writeReview";
 
 
 const MustWatchMovies = () => {
-  const {watchlist: movieIds } = useContext(MoviesContext);
+  const {watchlist: movieIds, setShowType } = useContext(MoviesContext);
 
   // Create an array of queries and run in parallel.
   const mustWatchMovieQueries = useQueries(
@@ -19,6 +19,7 @@ const MustWatchMovies = () => {
       };
     })
   );
+  setShowType("watchlist")
   // Check if any of the parallel queries is still loading.
   const isLoading = mustWatchMovieQueries.find((m) => m.isLoading === true);
 

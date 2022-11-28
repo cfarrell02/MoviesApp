@@ -35,7 +35,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-          <SiteHeader />      {/* New Header  */}
+          <SiteHeader props="" />      {/* New Header  */}
           <MoviesContextProvider>
             <TVContextProvider>
       <Routes>

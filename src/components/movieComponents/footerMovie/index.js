@@ -14,22 +14,20 @@ const Footer = (props) => {
   const setPageNumber = (pageNumber) =>{
     const newNum = parseInt(pageNum)+parseInt(pageNumber)
     if(newNum<=0) return;
-    var address = '';
     switch(type){
       case 'discover':
-        address = '/page='
+        navigate(`/page=${newNum}`, { replace: true });
         break;
       case 'toprated':
-        address = '/movies/toprated/page='
+        navigate(`/movies/toprated/page=${newNum}`, { replace: true });
         break;
       case 'upcoming':
-        address = '/movies/upcoming/page='
+        navigate(`/movies/upcoming/page=${newNum}`, { replace: true });
         break;
       default:
-        address = '/page='
+        console.error('Pagination not applicable for this page')
         break;
     }
-    navigate(`${address}${newNum}`, { replace: true });
   }
   const title = props.title
   return (
