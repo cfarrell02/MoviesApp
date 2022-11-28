@@ -17,9 +17,12 @@ import AddMovieReviewPage from './pages/addMovieReviewPage';
 import {Link} from 'react-router-dom'
 import FavouriteTVPage from "./pages/favouriteTVPage";
 import MustWatchMovies from "./pages/mustWatchMoviePage";
+import { useEffect, useState } from "react";
 import TVReviewPage from "./pages/tvReviewPage";
 import TopRatedTVPage from "./pages/topratedTVPage";
 import TVContextProvider from "./contexts/tvContext";
+import LoginPage from "./pages/loginPage";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,12 +35,21 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
+  const [user, setUser] = useState({});
+useEffect(() => {
+  onAuthStateChanged(getAuth(), (currentUser) => {
+    setUser(currentUser);
+  })});
   return (
+
     <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-          <SiteHeader props="" />      {/* New Header  */}
+    {user != null ? (
+      <>
+          <SiteHeader />      
           <MoviesContextProvider>
             <TVContextProvider>
+              
       <Routes>
         <Route exact path="/movies/favourites" element={<FavouriteMoviesPage />} />
         <Route path="/movies/:id" element={<MoviePage />} />
@@ -52,15 +64,25 @@ const App = () => {
         <Route path="/tvshows/toprated/page=:pageNumber" element={ <TopRatedTVPage /> } />
         <Route path="/tvshows/favourites" element={ <FavouriteTVPage /> } />
         <Route path="/page=:pageNumber" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={ <Navigate to="/page=1" /> } />
       </Routes>
+              
       </TVContextProvider>
-      </MoviesContextProvider>
+      </MoviesContextProvider></>
+      ):(
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={ <Navigate to="/login" /> } />
+      </Routes>)
+      }
     </BrowserRouter>
     <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
+
   );
 };
 
 const rootElement = createRoot( document.getElementById("root") )
 rootElement.render(<App /> );
+
