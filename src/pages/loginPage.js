@@ -4,9 +4,13 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  deleteUser,
+  reauthenticateWithCredential,
+  reauthenticateWithPopup,
+  EmailAuthProvider
 } from "firebase/auth";
 import "../style.css";
-import { auth } from "../firebase-config";
+import { auth, signInWithGoogle } from "../firebase-config";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -17,6 +21,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
 import img from '../images/pexels-dziana-hasanbekava-5480827.jpg';
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import GoogleIcon from '@mui/icons-material/Google';
+
 
 function LoginPage() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -34,6 +41,8 @@ function LoginPage() {
   }
   )
 
+  
+
 
   const register = async () => {
     try {
@@ -49,6 +58,7 @@ function LoginPage() {
   };
 
   const login = async () => {
+    console.log(process.env.FIREBASE_API_KEY);
     try {
       const user = await signInWithEmailAndPassword(
         auth,
@@ -65,6 +75,26 @@ function LoginPage() {
     await signOut(auth);
   };
 
+  const deleteCurrentUser = async (password) => {
+    try{
+      const credential = EmailAuthProvider.credential(
+        auth.currentUser.email,
+        password
+      )
+    
+      const result = await reauthenticateWithPopup(
+        auth.currentUser,
+        credential
+      )
+    
+      // Pass result.user here
+      await deleteUser(result.user)
+    console.log(`User ${user.email} deleted`);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
 
     <Grid container display="flex"
@@ -79,6 +109,7 @@ function LoginPage() {
           <CardHeader title={`${user.email} is logged in!`} style = {{textAlign:'center'}} />
           <CardActions style={{justifyContent: 'center'}}>
             <Button onClick={logout}>Logout</Button>
+            <Button onClick={deleteCurrentUser}>Delete this account</Button>
             </CardActions>
             </Card>
         </Grid>
@@ -161,6 +192,17 @@ function LoginPage() {
         </CardActions>
         </Card>
       </Grid>
+      <Grid item xs={12} display="flex"
+    justifyContent="center"
+    alignItems="center"
+    style = {{paddingTop:20}}>
+        <Card sx={{ maxWidth:400 }}>
+          <CardHeader title="Login With Google" style = {{textAlign:'center'}} />
+          <CardActions style={{justifyContent: 'center'}}>
+          <Button onClick={signInWithGoogle}><Card sx ={{width:50}}><GoogleIcon/></Card></Button>
+            </CardActions>
+            </Card>
+        </Grid>
       </>)}
 
       </Grid>

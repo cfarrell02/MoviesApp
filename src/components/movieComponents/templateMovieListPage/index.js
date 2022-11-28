@@ -24,7 +24,7 @@ function MovieListPageTemplate({ movies, title, action }) {
     [`searchQuery-${nameFilter}`, { query: nameFilter, pageNum: 1 }],
     getMovieSearchResults
   );
-  searchQuery = getMovieSearchResults(nameFilter, pageNum);
+
 
   movies = searchQuery !== undefined ? searchQuery.results : movies;
  // const searchQuery =  getSearchResults(nameFilter,pageNum)
@@ -52,7 +52,7 @@ function MovieListPageTemplate({ movies, title, action }) {
       </Grid>
       <Grid item xs = {12}>
       <Box display="flex"
-      justifyContent="right"
+      justifyContent="center"
       alignItems="center"
       sx= {{paddingTop:2}}>
         

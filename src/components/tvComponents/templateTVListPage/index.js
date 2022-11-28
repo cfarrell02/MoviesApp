@@ -44,7 +44,7 @@ function TVListPageTemplate({ TV, title, action }) {
       </Grid>
       <Grid item xs = {12}>
       <Box display="flex"
-      justifyContent="right"
+      justifyContent="center"
       alignItems="center"
       sx= {{paddingTop:2}}>
         

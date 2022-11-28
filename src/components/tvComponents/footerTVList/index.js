@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
+import Pagination from '@mui/material/Pagination';
 import { TVContext } from "../../../contexts/tvContext";
 
 const Footer = (props) => {
@@ -12,7 +13,7 @@ const Footer = (props) => {
   const {pageNum,type} = useContext(TVContext);
   
   const setPageNumber = (pageNumber) =>{
-    const newNum = parseInt(pageNum)+parseInt(pageNumber)
+    const newNum = pageNumber;
     if(newNum<=0) return;
     switch(type){
       case 'discover':
@@ -26,29 +27,13 @@ const Footer = (props) => {
         break;
     }
   }
-  const title = props.title
+  const handleChange = (event, value) => {
+    setPageNumber(value);
+  };
+ 
+  const currentPageNumber = parseInt(pageNum);
   return (
-    <Paper 
-      component="div" 
-      sx={{
-        display: "flex",
-        justifyContent: "space-around",
-        flexWrap: "wrap",
-        marginBottom: 1.5,
-      }}
-      >
-      <IconButton aria-label="go back" onClick={() => setPageNumber(-1)}>
-        <ArrowBackIcon color="primary" fontSize="large" />
-      </IconButton>
-
-
-      <Typography variant="h4" component="h3">
-        {title}
-      </Typography>
-      <IconButton aria-label="go forward" onClick={() => setPageNumber(1)}>
-        <ArrowForwardIcon color="primary" fontSize="large" />
-      </IconButton>
-    </Paper>
+  <Pagination count={2000} defaultPage={currentPageNumber}  siblingCount={2} boundaryCount={2} onChange={handleChange}/>
   );
 };
 
