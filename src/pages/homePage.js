@@ -5,7 +5,9 @@ import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
 import { MoviesContext } from "../contexts/moviesContext";
+
 import { useParams } from "react-router-dom";
+import {getAuth} from "firebase/auth";
 
 const HomePage = (props) => {
   const {setPageNumber, setShowType} = useContext(MoviesContext);

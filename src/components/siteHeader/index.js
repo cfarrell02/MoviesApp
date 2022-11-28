@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import {Link} from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -13,6 +14,8 @@ import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Avatar from '@mui/material/Avatar';
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -56,6 +59,13 @@ const SiteHeader = ({ history }) => {
       { label: "Favourites", path: "/tvshows/favourites" }
     ]
   ]
+
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    onAuthStateChanged(getAuth(), (currentUser) => {
+      setUser(currentUser);
+    })});
+    const initial = user.email?.charAt(0).toUpperCase();
 
   const handleMenuSelect = (pageURL) => {
     navigate(pageURL, { replace: true });
@@ -143,7 +153,13 @@ const SiteHeader = ({ history }) => {
               ))}
               </>
             )}
-        </Toolbar>
+            <div style = {{paddingLeft: 10}}>
+              <Link to="/login" style={{ textDecoration: "none" }}>
+            <Avatar >{user != undefined? initial:'-'} </Avatar> 
+            </Link>
+            </div>
+            
+                    </Toolbar>
       </AppBar>
       <Offset />
     </>
