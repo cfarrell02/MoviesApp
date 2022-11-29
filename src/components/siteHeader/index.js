@@ -17,10 +17,6 @@ import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Avatar from '@mui/material/Avatar';
 import { getSearchResults } from "../../api/tmdb-api";
-import { removeLastWord } from "../../util";
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
 
 
@@ -119,7 +115,7 @@ const SiteHeader = ({ history }) => {
 
           <Autocomplete
       id="country-select-demo"
-      sx={{ width: 500}}
+      sx={{ width: 500, marginRight:2}}
       options={searchResults ? searchResults : searchHistory}
       autoHighlight
       getOptionLabel={(option) => option.media_type === 'movie' ? option.title: option.name}

@@ -4,7 +4,7 @@ import PageTemplate from '../components/tvComponents/templateTVListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import PlaylistAdd from '../components/cardIcons/playlistAdd'
-import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
+import AddToFavouritesIconTV from '../components/cardIcons/addToFavourites'
 import { TVContext } from "../contexts/tvContext";
 import { useParams } from "react-router-dom";
 
@@ -35,7 +35,7 @@ const TopRatedTVPage  = (props) => {
       title="Top Rated Shows"
       TV={TV}
       action={(TV) => {
-        return <PlaylistAdd TV = {TV}/>
+        return <AddToFavouritesIconTV TV={TV} />
       }}
     />
   );

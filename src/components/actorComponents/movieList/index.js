@@ -11,6 +11,8 @@ import { getPersonMovies } from "../../../api/tmdb-api";
 import { excerpt } from "../../../util";
 import { Typography, Divider } from "@mui/material";
 import Avatar from "@mui/material/Avatar"
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 
 export default function MoviesList({ person}) {
   const [movies, setMovies] = useState([]);
@@ -21,8 +23,14 @@ export default function MoviesList({ person}) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const [query,setQuery] = useState("");
 
-  movies.sort(function(a, b){return b.popularity-a.popularity});
+  let filteredMovies = movies.filter((m) => { return m.title.toLowerCase().search(query.toLowerCase()) !== -1;
+  }).sort(function(a, b){return b.popularity-a.popularity});
+
+  const filterMovies = (event,value) => {
+  setQuery(event.target.value);
+};
 
   return (
 
@@ -31,6 +39,10 @@ export default function MoviesList({ person}) {
     <Typography align="center" variant="h6" sx={{ flexGrow: 1 }} style={{paddingTop:10,paddingBottom:10}}>
     {person.name}'s Movies
       </Typography>
+      <Divider flexItem />
+      <Box align="center">
+      <TextField size="small" style={{margin:5, width:300}} placeholder="Filter..." onChange={filterMovies}/>
+      </Box>
       <Divider flexItem />
       <Table sx={{minWidth: 550}} aria-label="similar movies table">
         <TableHead>
@@ -42,7 +54,7 @@ export default function MoviesList({ person}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {movies.map((r) => (
+          {filteredMovies.map((r) => (
             <TableRow key={r.id}>
               <TableCell component="th" scope="row">
                 {r.title}

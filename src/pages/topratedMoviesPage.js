@@ -34,7 +34,7 @@ const TopRatedMoviesPage  = (props) => {
       title="Top Rated Movies"
       movies={movies}
       action={(movie) => {
-        return <PlaylistAdd movie = {movie}/>
+        return <AddToFavouritesIcon movie={movie} />
       }}
     />
   );

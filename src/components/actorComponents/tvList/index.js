@@ -11,6 +11,8 @@ import { getPersonTV } from "../../../api/tmdb-api";
 import Avatar from "@mui/material/Avatar";
 import { excerpt } from "../../../util";
 import { Typography, Divider } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 
 export default function TVList({ person}) {
   const [TV, setTV] = useState([]);
@@ -24,6 +26,15 @@ export default function TVList({ person}) {
 
   TV.sort(function(a, b){return b.popularity-a.popularity});
 
+  const [query,setQuery] = useState("");
+
+  let filteredShows = TV.filter((m) => { return m.name.toLowerCase().search(query.toLowerCase()) !== -1;
+  }).sort(function(a, b){return b.popularity-a.popularity});
+
+  const filterShows = (event,value) => {
+  setQuery(event.target.value);
+};
+
   return (
 
     <TableContainer component={Paper}>
@@ -32,7 +43,11 @@ export default function TVList({ person}) {
     {person.name}'s Shows
       </Typography>
       <Divider flexItem />
-      <Table sx={{minWidth: 550}} aria-label="similar movies table">
+      <Box align="center">
+      <TextField size="small" style={{margin:5, width:300}} placeholder="Filter..." onChange={filterShows}/>
+      </Box>
+      <Divider flexItem />
+      <Table sx={{minWidth: 550}} aria-label="similar shows table">
         <TableHead>
           <TableRow>
             <TableCell >Title</TableCell>
@@ -42,7 +57,7 @@ export default function TVList({ person}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {TV.map((r) => (
+          {filteredShows.map((r) => (
             <TableRow key={r.id}>
               <TableCell component="th" scope="row">
                 {r.name}
