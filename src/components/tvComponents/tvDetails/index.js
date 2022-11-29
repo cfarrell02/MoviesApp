@@ -13,6 +13,8 @@ import Drawer from "@mui/material/Drawer";
 import SimilarTV from "../similarTV";
 import TVReviews from "../tvReviews";
 import { Divider } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Credits from "../tvCredits";
 
 
 
@@ -85,6 +87,11 @@ const TVDetails = ({ TV }) => {  // Don't miss this!
         ))}
       </Paper>
       <Divider style={{paddingTop: 20, paddingBottom: 20}}/>
+      <Grid item display="flex"
+    justifyContent="center"
+    alignItems="center"> 
+      <Credits TV={TV} />
+      </Grid>
       <SimilarTV TV = {TV}/>
       <Fab
         color="secondary"

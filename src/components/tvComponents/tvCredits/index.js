@@ -1,5 +1,3 @@
-
-
 import React, { useContext , useState , useEffect} from "react";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
@@ -9,15 +7,14 @@ import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { getMovieCredits } from "../../../api/tmdb-api";
+import { getTVCredits } from "../../../api/tmdb-api";
 import img from '../../../images/film-poster-placeholder.png';
 
-export default function Credits(movie){
+export default function Credits(TV){
     const [credits, setCredits] = useState([]);
     useEffect(() => {
-        console.log(movie.movie.id);
-        getMovieCredits(movie.movie.id).then((creds) => {
-            console.log(creds);
+        getTVCredits(TV.TV.id).then((creds) => {
+
             setCredits(creds);
         });
     }, []);
