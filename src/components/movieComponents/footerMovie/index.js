@@ -36,7 +36,7 @@ const Footer = (props) => {
  
   const currentPageNumber = parseInt(pageNum);
   return (
-  <Pagination count={2000} defaultPage={currentPageNumber}  siblingCount={2} boundaryCount={2} onChange={handleChange}/>
+  <Pagination count={500} defaultPage={currentPageNumber}  siblingCount={2} boundaryCount={2} onChange={handleChange}/>
   );
 };
 
