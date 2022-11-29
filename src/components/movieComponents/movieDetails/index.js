@@ -10,6 +10,8 @@ import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
 import SimilarMovies from "../similarMovies";
+import Grid from "@mui/material/Grid";
+import Credits from "../movieCredits";
 import Divider from "@mui/material/Divider";
 
 
@@ -80,6 +82,11 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
         ))}
       </Paper>
       <Divider style={{paddingTop: 20, paddingBottom: 20}}/>
+      <Grid item display="flex"
+    justifyContent="center"
+    alignItems="center"> 
+      <Credits movie={movie} />
+      </Grid>
       <SimilarMovies movie = {movie}/>
       <Fab
         color="secondary"

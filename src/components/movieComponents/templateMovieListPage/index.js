@@ -20,13 +20,14 @@ function MovieListPageTemplate({ movies, title, action }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const {pageNum} = useState(MoviesContext)
 
-  var {searchQuery, error, isLoading, isError } = useQuery(
-    [`searchQuery-${nameFilter}`, { query: nameFilter, pageNum: 1 }],
-    getMovieSearchResults
-  );
+  // var {searchQuery, error, isLoading, isError } = useQuery(
+  //   [`searchQuery-${nameFilter}`, { query: nameFilter, pageNum: 1 }],
+  //   getMovieSearchResults
+  // );
 
 
-  movies = searchQuery !== undefined ? searchQuery.results : movies;
+  // movies = searchQuery !== undefined ? searchQuery.results : movies;
+
  // const searchQuery =  getSearchResults(nameFilter,pageNum)
   let displayedMovies = movies
     .filter((m) => {

@@ -158,7 +158,6 @@ export const getMovie = (args) => {
     )
       .then((res) => res.json())
       .then((json) => {
-        // console.log(json.results);
         return json.results;
       });
   };
@@ -198,14 +197,23 @@ export const getMovie = (args) => {
     const {query} = queryPart;
     const [, pageNumPart] = args.queryKey;
     const {pageNum} = pageNumPart;
-    console.log(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${pageNum}&include_adult=false&query=${query}`)
+
     return fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${pageNum}&include_adult=false&query=${query}`
     ).then((response) => { 
       response.json() 
     }).then((json) => {
-      // console.log(json.results);
       return json.results;
       
    })
+  };
+
+  export const getMovieCredits = (id) => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        return json.cast;
+      });
   };
