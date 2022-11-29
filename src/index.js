@@ -23,6 +23,7 @@ import TopRatedTVPage from "./pages/topratedTVPage";
 import TVContextProvider from "./contexts/tvContext";
 import LoginPage from "./pages/loginPage";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import PersonDetailsPage from "./pages/actorDetailsPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -65,6 +66,7 @@ useEffect(() => {
         <Route path="/tvshows/favourites" element={ <FavouriteTVPage /> } />
         <Route path="/page=:pageNumber" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/person/:id" element={<PersonDetailsPage/>}/>
         <Route path="*" element={ <Navigate to="/page=1" /> } />
       </Routes>
               

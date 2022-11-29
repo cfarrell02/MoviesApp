@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { getMovieCredits } from "../../../api/tmdb-api";
 import img from '../../../images/film-poster-placeholder.png';
+import { Link } from "react-router-dom";
 
 export default function Credits(movie){
     const [credits, setCredits] = useState([]);
@@ -34,6 +35,7 @@ export default function Credits(movie){
                 <Grid item xs={3} display="flex"
                 justifyContent="center"
                 alignItems="center" style={{padding:10}}>
+                    <Link to={`/person/${c.id}`} style={{ textDecoration: "none" }}>
                     <Card sx={{ maxWidth:  400, width:300}} >
                     <CardHeader
                         title={c.name}
@@ -45,6 +47,7 @@ export default function Credits(movie){
         }
       />
                     </Card>
+                    </Link>
                 </Grid>
             ))}
 
