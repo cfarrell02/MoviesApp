@@ -230,16 +230,11 @@ export const getMovie = (args) => {
         return json.results;
       });
   }
-  export const getMovieSearchResults = (args) => {
-    const [, queryPart] = args.queryKey;
-    const {query} = queryPart;
-    const [, pageNumPart] = args.queryKey;
-    const {pageNum} = pageNumPart;
-
+  export const getSearchResults = (pageNum,searchTerm) => {
     return fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${pageNum}&include_adult=false&query=${query}`
+      `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${pageNum}&include_adult=false&query=${searchTerm}`
     ).then((response) => { 
-      response.json() 
+       return response.json() 
     }).then((json) => {
       return json.results;
       

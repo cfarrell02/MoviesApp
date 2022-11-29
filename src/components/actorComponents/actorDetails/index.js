@@ -31,14 +31,17 @@ const chip = { margin: 0.5 };
 
 const MovieDetails = ({ person }) => {  // Don't miss this!
   const [drawerOpen, setDrawerOpen] = useState(false);
-  var genderIcon;
+  var genderIcon, genderText;
 
     switch(person.gender){
       case 1: genderIcon = <WomanIcon/>
+              genderText="Woman";
       break;
       case 2: genderIcon = <ManIcon/>
+              genderText="Man";
       break;
       default: genderIcon =  <TransgenderIcon/>
+              genderText="Transgender";
       break;
     }
   
@@ -74,13 +77,14 @@ const MovieDetails = ({ person }) => {  // Don't miss this!
       
         <Chip icon={<AccessTimeIcon />} label={`${person.place_of_birth}`} />
         <Chip
-          icon= {genderIcon}/>
+          icon= {genderIcon} label= {genderText}/>
         
         <Chip
           icon={<StarRate />}
           label={`Popularity: ${person.popularity} `}
         />
         <Chip label={`Born: ${person.birthday}`} />
+        {person.deathday ? (<Chip label={`Died: ${person.deathday}`} />) : null}
       </Paper>
       <Paper 
         component="ul" 

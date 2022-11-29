@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import { Divider } from "@mui/material";
+import { Autocomplete, Divider, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
@@ -16,6 +16,14 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Avatar from '@mui/material/Avatar';
+import { getSearchResults } from "../../api/tmdb-api";
+import { removeLastWord } from "../../util";
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+import Box from '@mui/material/Box';
+
+
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -23,6 +31,7 @@ const SiteHeader = ({ history }) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [searchHistory, setSearchHistory] = useState([]);
 
 
 
@@ -60,6 +69,9 @@ const SiteHeader = ({ history }) => {
     ]
   ]
 
+  const [searchResults, setSearchResults] = useState([]);
+
+
   const [user, setUser] = useState({});
   useEffect(() => {
     onAuthStateChanged(getAuth(), (currentUser) => {
@@ -76,18 +88,68 @@ const SiteHeader = ({ history }) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleAutoFill = (event,value) => {
+    const query = event.target.value;
+    getSearchResults(1,query).then((results) => {
+  
+    setSearchResults(results);
+    });
 
+  }
+
+  const handleSearch = (event,value) => {
+    if(!value) return;
+    setSearchHistory([...searchHistory,value]);
+    if(value.media_type === "movie"){
+      navigate(`/movies/${value.id}`);
+    }else if(value.media_type === "tv"){
+      navigate(`/tvshows/${value.id}`);
+    }else{
+      navigate(`/person/${value.id}`);
+    }
+  };
 
   return (
     <>
-      <AppBar position="fixed" color="secondary" sx={{ backgroundColor: 'lightblue', color: 'black' }}>
+      <AppBar position="fixed" color="secondary" sx={{ backgroundColor: 'lightblue', color: 'black'}} >
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
             TMDB Client
           </Typography>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            All you ever wanted to know about Movies!
-          </Typography>
+
+          <Autocomplete
+      id="country-select-demo"
+      sx={{ width: 500}}
+      options={searchResults ? searchResults : searchHistory}
+      autoHighlight
+      getOptionLabel={(option) => option.media_type === 'movie' ? option.title: option.name}
+      onChange={handleSearch}
+      renderOption={(props, option) => (
+        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+          <img
+            loading="lazy"
+            width="25"
+            src={`https://image.tmdb.org/t/p/w500/${option.media_type === 'person' ?option.profile_path: option.poster_path}`}
+            alt=""
+          />
+          { option.media_type === 'movie' ? option.title: option.name} ({option.media_type}) {option.media_type === 'person' ?  (option.media_type === 'movie' ?option.release_date: option.first_air_date):null}
+        </Box>
+      )}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Search the database..."
+          inputProps={{
+            ...params.inputProps,
+         //   autoComplete: 'new-password', // disable autocomplete and autofill
+          }}
+          onChange={handleAutoFill}
+
+        />
+        )}
+        />
+
+
             {isMobile ? (
               <>
                 <IconButton

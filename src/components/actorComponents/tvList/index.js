@@ -17,7 +17,6 @@ export default function TVList({ person}) {
 
   useEffect(() => {
     getPersonTV(person.id).then((similarTV) => {
-      console.log(similarTV.cast)
       setTV(similarTV.cast);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

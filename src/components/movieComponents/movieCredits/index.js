@@ -16,9 +16,7 @@ import { Link } from "react-router-dom";
 export default function Credits(movie){
     const [credits, setCredits] = useState([]);
     useEffect(() => {
-        console.log(movie.movie.id);
         getMovieCredits(movie.movie.id).then((creds) => {
-            console.log(creds);
             setCredits(creds);
         });
     }, []);
