@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React, { useEffect, useState, useContext }  from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,14 +8,23 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
 import { getMovieReviews } from "../../../api/tmdb-api";
+import { MoviesContext } from "../../../contexts/moviesContext";
 import { excerpt } from "../../../util";
 
 export default function MovieReviews({ movie }) {
   const [reviews, setReviews] = useState([]);
-
+   const {myReviews} = useContext(MoviesContext);
+   console.log('2222')
+   console.log(myReviews);
+  var thisReviews = myReviews.filter((r) => r.movieId === movie.id);
+  console.log('3333')
+  console.log(thisReviews);
   useEffect(() => {
-    getMovieReviews(movie.id).then((reviews) => {
-      setReviews(reviews);
+    getMovieReviews(movie.id).then((reviews2) => {
+      let reviews3 = reviews2;
+      if(thisReviews.length>0){
+      reviews3 = reviews2.concat(thisReviews);}
+      setReviews(reviews3);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

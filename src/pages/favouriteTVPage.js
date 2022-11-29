@@ -45,7 +45,7 @@ setShowType("favourites")
         return (
           <>
             <RemoveFromFavouritesTV TV={TV} />
-            <WriteReview movie={TV} />
+            {/*<WriteReview movie={TV} /> */}
           </>
         );
       }}

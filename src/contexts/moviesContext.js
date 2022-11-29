@@ -3,11 +3,11 @@ import React, { useState } from "react";
 export const MoviesContext = React.createContext(null);
 
 const MoviesContextProvider = (props) => {
-  const [myReviews, setMyReviews] = useState( {} ) 
+  const [myReviews, setMyReviews] = useState( [] ) 
   const [favourites, setFavourites] = useState( [] )
   const [watchlist, setWatchlist] = useState( [] )
-  const [pageNum, setPageNum] = useState([])
-  const [type, setType] = useState([])
+  const [pageNum, setPageNum] = useState()
+  const [type, setType] = useState('')
 
   const setPageNumber = (num) => {
     setPageNum(num);
@@ -36,6 +36,7 @@ const MoviesContextProvider = (props) => {
 
 
     const addReview = (movie, review) => {
+      if(myReviews.length === 0) setMyReviews([])
       setMyReviews( {...myReviews, [movie.id]: review } )
     };
 
@@ -51,6 +52,7 @@ const MoviesContextProvider = (props) => {
       value={{
         favourites,
         watchlist,
+        myReviews,
         addToFavourites,
         addToMustWatch,
         removeFromFavourites,

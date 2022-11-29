@@ -115,7 +115,7 @@ const SiteHeader = ({ history }) => {
 
           <Autocomplete
       id="country-select-demo"
-      sx={{ width: 500, marginRight:2}}
+      sx={{ width: 500, marginRight:2, backgroundColor: 'white', borderRadius: 2 }}
       options={searchResults ? searchResults : searchHistory}
       autoHighlight
       getOptionLabel={(option) => option.media_type === 'movie' ? option.title: option.name}

@@ -9,11 +9,15 @@ import HomeIcon from "@mui/icons-material/Home";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Avatar from '@mui/material/Avatar';
 import { useNavigate } from "react-router-dom";
+import WriteReviewIcon from "../../cardIcons/writeReview";
+import { useContext } from "react";
+import {MoviesContext}  from "../../../contexts/moviesContext";
+import Box from "@mui/material/Box";
 
 const MovieHeader = (props) => {
   const movie = props.movie;
-  const movies = JSON.parse(localStorage.getItem("favourites")); 
-  const ids = movies.map((m) => m.id);
+  const {favourites} = useContext(MoviesContext)
+  const ids = favourites
   const navigate = useNavigate();
 
   return (
@@ -30,23 +34,28 @@ const MovieHeader = (props) => {
       <IconButton aria-label="go back" onClick={() => navigate(-1)} >
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
-       {
-          ids.includes(movie.id) ? (
-            <Avatar sx={{ backgroundColor: 'red' }}>
-              <FavoriteIcon />
-            </Avatar>
+
+        <Box align='center'>
+
+      <Typography variant="h4" component="h3">
+      <WriteReviewIcon movie={movie} />
+        {movie.title+" "}
+        {
+          favourites.includes(movie.id) ? (
+              <FavoriteIcon style={{color:'red'}}/>
           ) : null
         }
 
-      <Typography variant="h4" component="h3">
-        {movie.title+" "}
         <a href={movie.homepage}>
           <HomeIcon color="primary" />
         </a>
+
+
         <br />
         {movie.tagline ?
         <span sx={{ fontSize: "1.5rem" }}>{`   "${movie.tagline}"`} </span> : null}
       </Typography>
+      </Box>
 
       <IconButton aria-label="go forward" onClick={() => navigate(+1) } >
         <ArrowForwardIcon color="primary" fontSize="large" />
