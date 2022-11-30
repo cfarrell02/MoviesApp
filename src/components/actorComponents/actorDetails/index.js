@@ -14,6 +14,7 @@ import TransgenderIcon from '@mui/icons-material/Transgender';
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import Card from "@mui/material/Card";
+import { CardContent, CardHeader } from "@mui/material";
 
 
 
@@ -54,10 +55,15 @@ const MovieDetails = ({ person }) => {  // Don't miss this!
         {person.name}
       </Typography>
       </Card> */}
-<Card style={{marginBottom:40}}>
-      <Typography variant="h9" component="p" style={{padding:20}}>
+<Card style={{marginBottom:40, padding:20}} >
+      <CardHeader title="Biography">
+
+      </CardHeader>
+      <CardContent>
+      <Typography variant="h9" component="p" style= {{fontFamily: 'arial'}} >
         {person.biography}
       </Typography>
+      </CardContent>
 </Card>
       <Paper 
         component="ul" 

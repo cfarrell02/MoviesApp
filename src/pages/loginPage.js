@@ -9,6 +9,7 @@ import {
   reauthenticateWithPopup,
   EmailAuthProvider
 } from "firebase/auth";
+import { addNewFavourites, addNewMustWatch, addNewReviews } from "../api/firebase-api";
 import "../style.css";
 import { auth, signInWithGoogle } from "../firebase-config";
 import TextField from "@mui/material/TextField";
@@ -52,6 +53,9 @@ function LoginPage() {
         registerEmail,
         registerPassword
       );
+      await addNewFavourites(registerEmail);
+      await addNewMustWatch(registerEmail);
+      await addNewReviews(registerEmail);
       console.log(user);
     } catch (error) {
       console.log(error.message);
@@ -96,7 +100,7 @@ function LoginPage() {
     }
   };
 
-  const displayName = user.displayName ? user.displayName: user.email;
+  const displayName = user? (user.displayName ? user.displayName: user.email): null;
 
   return (
 
@@ -162,6 +166,7 @@ function LoginPage() {
         </Grid>
         <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
         <TextField
+        type = 'password'
           placeholder="Password..."
           onChange={(event) => {
             setRegisterPassword(event.target.value);
@@ -196,6 +201,7 @@ function LoginPage() {
         <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
         <TextField
           placeholder="Password..."
+          type = 'password'
           onChange={(event) => {
             setLoginPassword(event.target.value);
           }}

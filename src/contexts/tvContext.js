@@ -20,7 +20,7 @@ const TVContextProvider = (props) => {
   useEffect(() => {
     onAuthStateChanged(getAuth(), (currentUser) => {
       setUser(currentUser);
-      
+      if(!currentUser) return;
       const firebaseFavourites  = async () =>{
         const data = await getFavourites(currentUser.email);
       setFavouriteTV(data.shows)
