@@ -9,6 +9,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Avatar from '@mui/material/Avatar';
 import { useNavigate } from "react-router-dom";
+import AddToFavouritesIcon from "../../cardIcons/addToFavourites";
 import WriteReviewIcon from "../../cardIcons/writeReview";
 import { useContext } from "react";
 import {MoviesContext}  from "../../../contexts/moviesContext";
@@ -17,7 +18,6 @@ import Box from "@mui/material/Box";
 const MovieHeader = (props) => {
   const movie = props.movie;
   const {favourites} = useContext(MoviesContext)
-  const ids = favourites
   const navigate = useNavigate();
 
   return (
@@ -38,7 +38,9 @@ const MovieHeader = (props) => {
         <Box align='center'>
 
       <Typography variant="h4" component="h3">
+      <AddToFavouritesIcon movie={movie}/>
       <WriteReviewIcon movie={movie} />
+
         {movie.title+" "}
         {
           favourites.includes(movie.id) ? (
