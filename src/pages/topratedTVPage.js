@@ -4,7 +4,7 @@ import PageTemplate from '../components/tvComponents/templateTVListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import PlaylistAdd from '../components/cardIcons/playlistAdd'
-import AddToFavouritesIconTV from '../components/cardIcons/addToFavourites'
+import AddToFavouritesIconTV from '../components/cardIcons/addToFavouritesTV'
 import { TVContext } from "../contexts/tvContext";
 import { useParams } from "react-router-dom";
 

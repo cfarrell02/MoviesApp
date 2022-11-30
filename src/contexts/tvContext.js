@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
+import { getFavourites, updateUserShowFavourites} from "../api/firebase-api";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
 
 export const TVContext = React.createContext(null);
 
@@ -8,11 +10,24 @@ const TVContextProvider = (props) => {
   const [mustWatchTV,setMustWatchTV] = useState( [] )
   const [pageNum, setPageNum] = useState([])
   const [type, setType] = useState([])
+  const [user, setUser] = useState({});
   const setPageNumber = (num) => {
     
     //if(newPageNum <= 0) return;
     setPageNum(num);
   }
+
+  useEffect(() => {
+    onAuthStateChanged(getAuth(), (currentUser) => {
+      setUser(currentUser);
+      
+      const firebaseFavourites  = async () =>{
+        const data = await getFavourites(currentUser.email);
+      setFavouriteTV(data.shows)
+    
+      }
+      firebaseFavourites();
+    })},[]);
 
   const setShowType = (type) =>{
     setType(type);
@@ -23,6 +38,7 @@ const TVContextProvider = (props) => {
     if (!favouriteTV.includes(TV.id)) {
       newFavourites.push(TV.id);
     }
+    updateUserShowFavourites(user.email,newFavourites);
     setFavouriteTV(newFavourites);
   };
 
@@ -37,9 +53,11 @@ const TVContextProvider = (props) => {
 
   // We will use this function in a later section
   const removeFromFavourites = (TV) => {
-    setFavouriteTV( favouriteTV.filter(
+    const newFavourites = favouriteTV.filter(
       (mId) => mId !== TV.id
-    ) )
+    )
+    setFavouriteTV(newFavourites)
+    updateUserShowFavourites(user.email,newFavourites);
   };
 
   const removeFromMustWatch = (TV) => {

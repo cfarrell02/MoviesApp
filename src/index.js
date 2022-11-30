@@ -67,7 +67,7 @@ useEffect(() => {
         <Route path="/page=:pageNumber" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/person/:id" element={<PersonDetailsPage/>}/>
-        <Route path="*" element={ <Navigate to="/page=1" /> } />
+        <Route path="*" element={ <Navigate to="/login" /> } />
       </Routes>
               
       </TVContextProvider>

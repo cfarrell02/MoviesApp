@@ -23,6 +23,7 @@ import CardHeader from "@mui/material/CardHeader";
 import img from '../images/pexels-dziana-hasanbekava-5480827.jpg';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import GoogleIcon from '@mui/icons-material/Google';
+import { Link } from "react-router-dom";
 
 
 function LoginPage() {
@@ -95,25 +96,40 @@ function LoginPage() {
     }
   };
 
+  const displayName = user.displayName ? user.displayName: user.email;
+
   return (
 
     <Grid container display="flex"
     justifyContent="center"
     alignItems="center">
-      {user ? (
+      {user ? (<>
       <Grid item xs={12} display="flex"
     justifyContent="center"
     alignItems="center"
     style = {{paddingTop:20}}>
         <Card sx={{ width: 800 }}>
-          <CardHeader title={`${user.email} is logged in!`} style = {{textAlign:'center'}} />
+          <CardHeader title={`${displayName} is logged in!`} style = {{textAlign:'center'}} />
           <CardActions style={{justifyContent: 'center'}}>
             <Button onClick={logout}>Logout</Button>
-            <Button onClick={deleteCurrentUser}>Delete this account</Button>
+            {/* <Button onClick={deleteCurrentUser}>Delete this account</Button> */}
             </CardActions>
             </Card>
         </Grid>
-      ) : (<>
+              <Grid item xs={12} display="flex"
+              justifyContent="center"
+              alignItems="center"
+              style = {{paddingTop:50}}>
+                <Card sx={{width:1000}}>
+                <CardHeader title={`Hello ${displayName}, here are some quick links.`} style = {{textAlign:'center'}} />
+          <CardActions style={{justifyContent: 'center'}}>
+            <Link to="/movies/favourites" style={{ textDecoration: "none" }} ><Button>Favourite Movies</Button></Link>
+            <Link to="/tvshows/favourites" style={{ textDecoration: "none" }} ><Button>Favourite Shows</Button></Link>
+            </CardActions>
+                </Card>
+                </Grid>
+        
+                </> ) : (<>
             <Grid item xs={12} display="flex"
     justifyContent="center"
     alignItems="center"
