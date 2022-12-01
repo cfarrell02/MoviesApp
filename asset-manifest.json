@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/MoviesApp/static/css/main.4169c72c.css",
+    "main.js": "/MoviesApp/static/js/main.81659c3e.js",
+    "static/media/pexels-dziana-hasanbekava-5480827.jpg": "/MoviesApp/static/media/pexels-dziana-hasanbekava-5480827.6123c500508cea5447e7.jpg",
+    "static/media/film-poster-placeholder.png": "/MoviesApp/static/media/film-poster-placeholder.9a8182eb4c8ae70fe602.png",
+    "index.html": "/MoviesApp/index.html",
+    "main.4169c72c.css.map": "/MoviesApp/static/css/main.4169c72c.css.map",
+    "main.81659c3e.js.map": "/MoviesApp/static/js/main.81659c3e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4169c72c.css",
+    "static/js/main.81659c3e.js"
+  ]
+}
