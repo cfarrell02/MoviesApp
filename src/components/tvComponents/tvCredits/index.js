@@ -20,11 +20,11 @@ export default function Credits(TV){
         });
     }, []);
 
-
+    credits.splice(12);
 
 
     return(
-        <Card style={{maxHeight:1000, overflow:'scroll'}}>
+        <Card>
         <Grid container display="flex"
     justifyContent="center"
     alignItems="center">
