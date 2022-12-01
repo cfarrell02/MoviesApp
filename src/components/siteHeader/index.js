@@ -142,6 +142,7 @@ const SiteHeader = ({ history }) => {
          //   autoComplete: 'new-password', // disable autocomplete and autofill
           }}
           onChange={handleAutoFill}
+          onAction={handleSearch}
 
         />
         )}

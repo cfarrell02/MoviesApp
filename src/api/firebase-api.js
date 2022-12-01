@@ -47,6 +47,14 @@ export const updateUserMovieFavourites = async (email,movies) =>{
     const data = await getDocs(reviewCollectionRef);
     return data.docs.map((doc) => ({...doc.data(), id: doc.id})).find((obj) => obj.userEmail === email)
  }
+ export const getAllReviews = async () =>{
+      const data = await getDocs(reviewCollectionRef);
+      console.log('---')
+      const result = data.docs.map((doc) => ({...doc.data(), id: doc.id}))
+      let temp = [];
+      result.forEach((obj) => { temp.push(...obj.reviews)})
+      return temp;
+ }
  export const updateUserReview = async (email,reviews) =>{
     console.log(email);
     const obj = await getReviews(email);

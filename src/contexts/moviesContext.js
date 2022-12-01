@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from "react";
-import { getFavourites, updateUserMovieFavourites, getMustWatch, updateUserMustWatch, getReviews, updateUserReview} from "../api/firebase-api";
+import { getFavourites, updateUserMovieFavourites, getMustWatch, updateUserMustWatch, getReviews, updateUserReview ,getAllReviews} from "../api/firebase-api";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
+import { waitForPendingWrites } from "firebase/firestore";
 
 export const MoviesContext = React.createContext(null);
 
@@ -14,25 +15,27 @@ const MoviesContextProvider = (props) => {
 useEffect(() => {
   onAuthStateChanged(getAuth(), (currentUser) => {
     setUser(currentUser);
-    if(!currentUser) return;
+  })
+    if(!user) return;
     const firebaseFavourites  = async () =>{
-      const data = await getFavourites(currentUser.email);
+      const data = await getFavourites(user.email);
     console.log(data.shows)
     setFavourites(data.movies)
     }
     const firebaseMustWatch = async () => {
-      const data = await getMustWatch(currentUser.email);
+      const data = await getMustWatch(user.email);
       setWatchlist(data.movies);
     }
     const firebaseReviews = async () => {
-      const data = await getReviews(currentUser.email);
-      setMyReviews(data.reviews);
+      const data = await getAllReviews();
+      
+      setMyReviews(data);
     }
     firebaseReviews();
     firebaseMustWatch();
     firebaseFavourites();
-  })},[]);
 
+  },[]);
 
   const setPageNumber = (num) => {
     setPageNum(num);
