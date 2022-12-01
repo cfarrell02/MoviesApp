@@ -23,7 +23,6 @@ import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
 import img from '../images/pexels-dziana-hasanbekava-5480827.jpg';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import Alert from '@mui/material/Alert'
 import GoogleIcon from '@mui/icons-material/Google';
 import { Link } from "react-router-dom";
 
@@ -33,7 +32,6 @@ function LoginPage() {
   const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [error,setError] = useState("");
 
   const [user, setUser] = useState({});
 
@@ -60,7 +58,6 @@ function LoginPage() {
       await addNewReviews(registerEmail);
       console.log(user);
     } catch (error) {
-      setError(error.message);
       console.log(error.message);
     }
   };
@@ -75,7 +72,6 @@ function LoginPage() {
       );
       console.log(user);
     } catch (error) {
-      setError(error.message);
       console.log(error.message);
     }
   };
@@ -229,13 +225,6 @@ function LoginPage() {
             </CardActions>
             </Card>
         </Grid>
-        <Grid item xs={12} display="flex"
-    justifyContent="center"
-    alignItems="center"
-    style = {{paddingTop:20}}>
-      {error ?
-            <Alert severity="error">{error}</Alert> : null}
-      </Grid>
       </>)}
 
       </Grid>

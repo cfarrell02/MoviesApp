@@ -18,7 +18,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Avatar from '@mui/material/Avatar';
 import { getSearchResults } from "../../api/tmdb-api";
 import Box from '@mui/material/Box';
-import TheatersIcon from '@mui/icons-material/Theaters';
 
 
 
@@ -105,14 +104,13 @@ const SiteHeader = ({ history }) => {
       navigate(`/person/${value.id}`);
     }
   };
-  const displayName = user.displayName ? user.displayName : user.email;
 
   return (
     <>
       <AppBar position="fixed" color="secondary" sx={{ backgroundColor: 'lightblue', color: 'black'}} >
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
-          <TheatersIcon fontSize='medium'/> {displayName}'s Cinema 
+            TMDB Client
           </Typography>
 
           <Autocomplete
@@ -216,7 +214,7 @@ const SiteHeader = ({ history }) => {
             )}
             <div style = {{paddingLeft: 10}}>
               <Link to="/login" style={{ textDecoration: "none" }}>
-            <Avatar >{user !== undefined? initial:'-'} </Avatar> 
+            <Avatar >{user != undefined? initial:'-'} </Avatar> 
             </Link>
             </div>
             

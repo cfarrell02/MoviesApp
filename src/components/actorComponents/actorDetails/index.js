@@ -1,7 +1,7 @@
 import React, { useState} from "react";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MonetizationIcon from "@mui/icons-material/MonetizationOn";
 import StarRate from "@mui/icons-material/StarRate";
 import NavigationIcon from "@mui/icons-material/Navigation";
@@ -81,7 +81,7 @@ const MovieDetails = ({ person }) => {  // Don't miss this!
       </Paper>
       <Paper component="ul" sx={root}>
       
-        <Chip icon={<LocationOnIcon/>} label={`${person.place_of_birth}`} />
+        <Chip icon={<AccessTimeIcon />} label={`${person.place_of_birth}`} />
         <Chip
           icon= {genderIcon} label= {genderText}/>
         
