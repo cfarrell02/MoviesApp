@@ -22,7 +22,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
 import img from '../images/pexels-dziana-hasanbekava-5480827.jpg';
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Alert from '@mui/material/Alert'
 import GoogleIcon from '@mui/icons-material/Google';
 import { Link } from "react-router-dom";
@@ -222,12 +221,12 @@ function LoginPage() {
     justifyContent="center"
     alignItems="center"
     style = {{paddingTop:20}}>
-        <Card sx={{ maxWidth:400 }}>
+        {/* <Card sx={{ maxWidth:400 }}>
           <CardHeader title="Login With Google" style = {{textAlign:'center'}} />
           <CardActions style={{justifyContent: 'center'}}>
           <Button onClick={signInWithGoogle}><Card sx ={{width:50}}><GoogleIcon/></Card></Button>
             </CardActions>
-            </Card>
+            </Card> */}
         </Grid>
         <Grid item xs={12} display="flex"
     justifyContent="center"

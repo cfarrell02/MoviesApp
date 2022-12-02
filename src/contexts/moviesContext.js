@@ -11,31 +11,39 @@ const MoviesContextProvider = (props) => {
   const [watchlist, setWatchlist] = useState( [] )
   const [pageNum, setPageNum] = useState()
   const [type, setType] = useState('')
-  const [user, setUser] = useState({});
-useEffect(() => {
-  onAuthStateChanged(getAuth(), (currentUser) => {
-    setUser(currentUser);
-  })
-    if(!user) return;
-    const firebaseFavourites  = async () =>{
+  const [user, setUser] = useState();
+  useEffect(() => {
+    onAuthStateChanged(getAuth(), (currentUser) => {
+      setUser(currentUser);
+      if(!user) return;
+
+   
+    
+    const firebaseFavourites  = async () => {
+      
+      if(favourites.length !== 0) return; 
       const data = await getFavourites(user.email);
-    console.log(data.shows)
     setFavourites(data.movies)
+      
     }
     const firebaseMustWatch = async () => {
+      if(watchlist.length !== 0 ) return;
       const data = await getMustWatch(user.email);
       setWatchlist(data.movies);
     }
     const firebaseReviews = async () => {
+      if(myReviews.length !== 0) return;
       const data = await getAllReviews();
       
       setMyReviews(data);
     }
+  
     firebaseReviews();
     firebaseMustWatch();
     firebaseFavourites();
+  })
+    });
 
-  },[]);
 
   const setPageNumber = (num) => {
     setPageNum(num);

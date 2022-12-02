@@ -1,6 +1,5 @@
 import { db } from "../firebase-config";
 import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from 'firebase/firestore'
-import { Identity } from "@mui/base";
 
 const favouriteCollectionRef = collection(db,'favourites');
 const mustWatchCollectionRef = collection(db,'mustWatch');
@@ -9,7 +8,10 @@ const commentsCollectionRef = collection(db,'comments');
 export const getFavourites =  async (email) => {
    // const favouriteCollectionRef = collection(db,'favourites')
     const data = await getDocs(favouriteCollectionRef);
-    return data.docs.map((doc) => ({...doc.data(), id: doc.id})).find((obj) => obj.userEmail === email)
+    
+    const movies = data.docs.map((doc) => ({...doc.data(), id: doc.id})).find((obj) => obj.userEmail === email)
+    
+    return movies
   }
 
   export const addNewFavourites = async (email) =>{

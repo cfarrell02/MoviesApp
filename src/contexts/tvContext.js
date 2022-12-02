@@ -22,12 +22,14 @@ const TVContextProvider = (props) => {
       setUser(currentUser);
       if(!currentUser) return;
       const firebaseFavourites  = async () =>{
+        if(favouriteTV.length !== 0) return;
         const data = await getFavourites(currentUser.email);
       setFavouriteTV(data.shows)
     
       }
       firebaseFavourites();
-    })},[]);
+
+    })});
 
   const setShowType = (type) =>{
     setType(type);
