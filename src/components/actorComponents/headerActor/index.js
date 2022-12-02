@@ -9,15 +9,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Avatar from '@mui/material/Avatar';
 import { useNavigate } from "react-router-dom";
-import AddToFavouritesIcon from "../../cardIcons/addToFavourites";
-import WriteReviewIcon from "../../cardIcons/writeReview";
-import { useContext } from "react";
-import {MoviesContext}  from "../../../contexts/moviesContext";
-import Box from "@mui/material/Box";
 
 const MovieHeader = (props) => {
-  const movie = props.movie;
-  const {favourites} = useContext(MoviesContext)
+  const person = props.person;
+  // const persons = JSON.parse(localStorage.getItem("favourites")); 
+  // const ids = person.map((m) => m.id);
   const navigate = useNavigate();
 
   return (
@@ -34,30 +30,23 @@ const MovieHeader = (props) => {
       <IconButton aria-label="go back" onClick={() => navigate(-1)} >
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
-
-        <Box align='center'>
+       {/* {
+          ids.includes(person.id) ? (
+            <Avatar sx={{ backgroundColor: 'red' }}>
+              <FavoriteIcon />
+            </Avatar>
+          ) : null
+        } */}
 
       <Typography variant="h4" component="h3">
-      <AddToFavouritesIcon movie={movie}/>
-      <WriteReviewIcon movie={movie} />
-
-        {movie.title+" "}
-        {
-          favourites.includes(movie.id) ? (
-              <FavoriteIcon style={{color:'red'}}/>
-          ) : null
-        }
-
-        <a href={movie.homepage}>
+        {person.name+" "}
+        <a href={person.homepage}>
           <HomeIcon color="primary" />
         </a>
-
-
         <br />
-        {movie.tagline ?
-        <span sx={{ fontSize: "1.5rem" }}>{`   "${movie.tagline}"`} </span> : null}
+        {/* {movie.tagline ?
+        <span sx={{ fontSize: "1.5rem" }}>{`   "${movie.tagline}"`} </span> : null} */}
       </Typography>
-      </Box>
 
       <IconButton aria-label="go forward" onClick={() => navigate(+1) } >
         <ArrowForwardIcon color="primary" fontSize="large" />
