@@ -1,10 +1,11 @@
 import { db } from "../firebase-config";
-import {collection, getDocs, addDoc, updateDoc, doc} from 'firebase/firestore'
+import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from 'firebase/firestore'
 import { Identity } from "@mui/base";
 
 const favouriteCollectionRef = collection(db,'favourites');
 const mustWatchCollectionRef = collection(db,'mustWatch');
 const reviewCollectionRef = collection(db,'reviews');
+const commentsCollectionRef = collection(db,'comments');
 export const getFavourites =  async (email) => {
    // const favouriteCollectionRef = collection(db,'favourites')
     const data = await getDocs(favouriteCollectionRef);
@@ -49,17 +50,32 @@ export const updateUserMovieFavourites = async (email,movies) =>{
  }
  export const getAllReviews = async () =>{
       const data = await getDocs(reviewCollectionRef);
-      console.log('---')
+    //  console.log('---')
       const result = data.docs.map((doc) => ({...doc.data(), id: doc.id}))
       let temp = [];
       result.forEach((obj) => { temp.push(...obj.reviews)})
       return temp;
  }
  export const updateUserReview = async (email,reviews) =>{
-    console.log(email);
+   // console.log(email);
     const obj = await getReviews(email);
     console.log(obj)
     const reviewDoc = doc(db,'reviews',obj.id);
     await updateDoc(reviewDoc, {reviews:reviews});
  }
- 
+ export const getAllComments = async () =>{
+      const data = await getDocs(commentsCollectionRef);
+      return data.docs.map((doc) => ({...doc.data(), id: doc.id}))
+   }
+export const addNewComment = async (comment) =>{
+      await addDoc(commentsCollectionRef, {content:comment.content,email:comment.email,time:comment.time,creator:comment.creator})
+   }
+export const updateComments = async (comments) =>{
+      const data = await getDocs(commentsCollectionRef);
+      const commentDoc = doc(db,'comments',data.id);
+      await updateDoc(commentDoc, {comments:comments});
+   }
+export const deleteComment = async (id) =>{
+     const commentDoc = doc(db,'comments',id);
+     await deleteDoc(commentDoc);
+   }

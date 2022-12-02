@@ -24,6 +24,7 @@ import TVContextProvider from "./contexts/tvContext";
 import LoginPage from "./pages/loginPage";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import PersonDetailsPage from "./pages/actorDetailsPage";
+import AboutPage from "./pages/aboutPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -67,6 +68,7 @@ useEffect(() => {
         <Route path="/page=:pageNumber" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/person/:id" element={<PersonDetailsPage/>}/>
+        <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={ <Navigate to="/login" /> } />
       </Routes>
               

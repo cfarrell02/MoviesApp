@@ -214,6 +214,8 @@ const SiteHeader = ({ history }) => {
               ))}
               </>
             )}
+           <Button onClick = {() => navigate('/about')} sx={{ backgroundColor: 'darkblue' , color : 'white', marginLeft: 2}}>About</Button>
+           <Divider orientation="vertical" flexItem sx={{paddingRight: 2}}/>
             <div style = {{paddingLeft: 10}}>
               <Link to="/login" style={{ textDecoration: "none" }}>
             <Avatar >{user !== undefined? initial:'-'} </Avatar> 
