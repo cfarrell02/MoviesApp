@@ -15,19 +15,25 @@ import Comments from "../components/commentSection";
 
 const AboutPage = (props) => {
   const [user, setUser] = useState({});
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     onAuthStateChanged(getAuth(), (currentUser) => {
       setUser(currentUser);
-    });
+    
     const setAllComments = async () => {
         const data = await getAllComments();
         setComments(data);
     }
-    setAllComments();
-  }
-  )
- const [comments, setComments] = useState([]);
+     setAllComments();
+
+  });
+
+}, []);
+
+comments.sort((a, b) => a.time - b.time);
+
+
 
 
 
