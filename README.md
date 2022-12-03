@@ -117,5 +117,5 @@ n/a
 ## Independent learning (If relevant).
 
 + Firebase - used for authentication. Guide used for firebase: https://youtu.be/9bXhf_TELP4
-+ Firestore - usdd for backedn persistence in storing favourites etc. Gude used for firestore: https://youtu.be/jCY6DH8F4oc
++ Firestore - used for backend persistence in storing favourites etc. Gude used for firestore: https://youtu.be/jCY6DH8F4oc
 
