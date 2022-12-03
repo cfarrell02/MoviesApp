@@ -10,6 +10,7 @@ const TVContextProvider = (props) => {
   const [mustWatchTV,setMustWatchTV] = useState( [] )
   const [pageNum, setPageNum] = useState([])
   const [type, setType] = useState([])
+  var fetchedFavourites = false;
   const [user, setUser] = useState({});
   const setPageNumber = (num) => {
     
@@ -17,16 +18,19 @@ const TVContextProvider = (props) => {
     setPageNum(num);
   }
 
+
+  const firebaseFavourites  = async () =>{
+    if(!fetchedFavourites) return;
+    const data = await getFavourites(user.email);
+  setFavouriteTV(data.shows)
+  fetchedFavourites = false;
+
+  }
   useEffect(() => {
     onAuthStateChanged(getAuth(), (currentUser) => {
       setUser(currentUser);
       if(!currentUser) return;
-      const firebaseFavourites  = async () =>{
-        if(favouriteTV.length !== 0) return;
-        const data = await getFavourites(currentUser.email);
-      setFavouriteTV(data.shows)
-    
-      }
+
       firebaseFavourites();
 
     })});
@@ -40,6 +44,7 @@ const TVContextProvider = (props) => {
     if (!favouriteTV.includes(TV.id)) {
       newFavourites.push(TV.id);
     }
+    fetchedFavourites = true;
     updateUserShowFavourites(user.email,newFavourites);
     setFavouriteTV(newFavourites);
   };
@@ -59,6 +64,7 @@ const TVContextProvider = (props) => {
       (mId) => mId !== TV.id
     )
     setFavouriteTV(newFavourites)
+    fetchedFavourites = true;
     updateUserShowFavourites(user.email,newFavourites);
   };
 

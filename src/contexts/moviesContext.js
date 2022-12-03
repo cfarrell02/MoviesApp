@@ -12,6 +12,30 @@ const MoviesContextProvider = (props) => {
   const [pageNum, setPageNum] = useState()
   const [type, setType] = useState('')
   const [user, setUser] = useState();
+  var fetchedFavourites = false, fetchedWatchlist = false, fetchedReviews = false;
+  const firebaseFavourites  = async () => {
+      
+    if(!fetchedFavourites) return;
+    const data = await getFavourites(user.email);
+  setFavourites(data.movies)
+  fetchedFavourites = false;
+    
+  }
+  const firebaseMustWatch = async () => {
+    
+    if(!fetchedWatchlist) return;
+    console.log("firebaseMustWatch" + watchlist.length)
+    const data = await getMustWatch(user.email);
+    setWatchlist(data.movies);
+    fetchedWatchlist = false;
+  }
+  const firebaseReviews = async () => {
+   if(!fetchedReviews) return;
+    const data = await getAllReviews();
+    
+    setMyReviews(data);
+    fetchedReviews = false;
+  }
   useEffect(() => {
     onAuthStateChanged(getAuth(), (currentUser) => {
       setUser(currentUser);
@@ -19,24 +43,7 @@ const MoviesContextProvider = (props) => {
 
    
     
-    const firebaseFavourites  = async () => {
-      
-      if(favourites.length !== 0) return; 
-      const data = await getFavourites(user.email);
-    setFavourites(data.movies)
-      
-    }
-    const firebaseMustWatch = async () => {
-      if(watchlist.length !== 0 ) return;
-      const data = await getMustWatch(user.email);
-      setWatchlist(data.movies);
-    }
-    const firebaseReviews = async () => {
-      if(myReviews.length !== 0) return;
-      const data = await getAllReviews();
-      
-      setMyReviews(data);
-    }
+
   
     firebaseReviews();
     firebaseMustWatch();
@@ -59,6 +66,7 @@ const MoviesContextProvider = (props) => {
     if (!favourites.includes(movie.id)) {
       newFavourites.push(movie.id);
     }
+    fetchedFavourites = true;
     updateUserMovieFavourites(user.email,newFavourites);
     setFavourites(newFavourites);
   };
@@ -69,6 +77,7 @@ const MoviesContextProvider = (props) => {
       newWatchlist.push(movie.id);
     }
     console.log(newWatchlist);
+    fetchedWatchlist = true;
     updateUserMustWatch(user.email,newWatchlist);
     setWatchlist(newWatchlist);
   };
@@ -78,6 +87,7 @@ const MoviesContextProvider = (props) => {
       let newReviews = [...myReviews];
       newReviews.push(review)
       setMyReviews(newReviews);
+      fetchedReviews = true;
       updateUserReview(user.email,newReviews);
 
       //setMyReviews( {...myReviews, review } )
@@ -89,6 +99,7 @@ const MoviesContextProvider = (props) => {
       (mId) => mId !== movie.id
     )
     setFavourites(newFavourites)
+    fetchedFavourites = true;
     updateUserMovieFavourites(user.email,newFavourites);
   };
 
