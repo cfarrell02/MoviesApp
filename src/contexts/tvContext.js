@@ -10,7 +10,7 @@ const TVContextProvider = (props) => {
   const [mustWatchTV,setMustWatchTV] = useState( [] )
   const [pageNum, setPageNum] = useState([])
   const [type, setType] = useState([])
-  var fetchedFavourites = false;
+  const [fetchedFavourites, setFetchedFavourites] = useState(true);
   const [user, setUser] = useState({});
   const setPageNumber = (num) => {
     
@@ -23,7 +23,7 @@ const TVContextProvider = (props) => {
     if(!fetchedFavourites) return;
     const data = await getFavourites(user.email);
   setFavouriteTV(data.shows)
-  fetchedFavourites = false;
+  setFetchedFavourites(false);
 
   }
   useEffect(() => {
@@ -44,9 +44,11 @@ const TVContextProvider = (props) => {
     if (!favouriteTV.includes(TV.id)) {
       newFavourites.push(TV.id);
     }
-    fetchedFavourites = true;
-    updateUserShowFavourites(user.email,newFavourites);
+    updateUserShowFavourites(user.email,newFavourites).then(() => {
+    setFetchedFavourites(true);
+    
     setFavouriteTV(newFavourites);
+    })
   };
 
   const addToMustWatch = (TV) => {
@@ -63,9 +65,11 @@ const TVContextProvider = (props) => {
     const newFavourites = favouriteTV.filter(
       (mId) => mId !== TV.id
     )
+    updateUserShowFavourites(user.email,newFavourites).then(() => {
     setFavouriteTV(newFavourites)
-    fetchedFavourites = true;
-    updateUserShowFavourites(user.email,newFavourites);
+  setFetchedFavourites(true);
+    })
+    
   };
 
   const removeFromMustWatch = (TV) => {
