@@ -6,8 +6,6 @@ Name: Cian Farrell
 
 ### New Pages.
 
-e.g.
-
 + Added Top Rated Movies
 + Modified Movies details to include cast and similar movie details
 + Modified template movies page by moving filter card into a drawer
