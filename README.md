@@ -14,7 +14,7 @@ Name: Cian Farrell
 + Added TV Shows details, also including similar shows and actors
 + Added actor details which includes a bio and list of shows/movies involved in
 + Added a login page for firebase authentication
-+ Added an about pag with a comment section
++ Added an about page with a comment section
 
 ### New Features.
 
